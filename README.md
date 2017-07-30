@@ -23,4 +23,11 @@ the networking. Also, not all Kubernetes providers support Network Policies.
 - DENY all traffic from other namespaces
 - ALLOW all traffic from other namespaces
 - ALLOW traffic from applications in other namespaces
+- ALLOW traffic from an application in another namespace
 - ALLOW all traffic to an application in a namespace denying all non-whitelisted traffic
+
+### Advanced
+
+- ALLOW traffic only to certain port numbers of an application
+- ALLOW traffic from apps using multiple selectors
+- ALLOW traffic from apps using multiple selectors
