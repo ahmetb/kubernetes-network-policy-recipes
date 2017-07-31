@@ -3,11 +3,11 @@
 This NetworkPolicy will drop all traffic to pods of an
 application, selected using Pod Selectors.
 
-**Use Cases:** You want to run a Pod and want to prevent any other
-Pods communicating with it.
-
-If you deploy other Network Policies that match to this application
-and allow traffic, this rule will be ineffective.
+**Use Cases:**
+- You want to run a Pod and want to prevent any other Pods
+  communicating with it.
+- You temporarily want to isolate traffic to a Service from
+  other Pods.
 
 ### Example
 
@@ -53,6 +53,8 @@ Run a test container again, and try to query web:
 Traffic dropped!
 
 -----
+
+### Remarks
 
 In the manifest above, we target Pods with `app=web,env=prod` labels
 to police the newtork. This manifest file is missing the `spec.ingress` field.
