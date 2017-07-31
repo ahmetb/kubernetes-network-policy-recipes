@@ -7,6 +7,8 @@ choose particular namespaces.
 **Use Case:**
 - Restrict traffic to a production database only to namespaces where production
   workloads are deployed.
+- Enable monitoring tools deployed to a particular namespace to scrape metrics
+  from the current namespace.
 
 ### Example
 
