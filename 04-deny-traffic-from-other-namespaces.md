@@ -20,16 +20,6 @@ Create a new namespace called `secondary` and start a web service:
     kubectl run web --namespace secondary --image=nginx \
         --labels=app=web --expose --port 80
 
-Query this web service from the `default` namespace:
-
-```sh
-$ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web.secondary
-<!DOCTYPE html>
-<html>
-(works)
-```
-
 Save the following manifest to `web-deny-other-namespaces.yaml` and apply
 to the cluster:
 
