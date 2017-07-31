@@ -46,9 +46,9 @@ networkpolicy "web-deny-other-namespaces" created"
 Note a few things about this manifest:
 
 - `namespace: secondary` deploys it to the `secondary` namespace.
-- This manifest allows all connections to Pods with `app=web` label
-  from the `secondary` namespace, and blocks the traffic from all
-  other namespaces.
+- it allows all connections to Pods with `app=web` label
+  from the `secondary` namespac
+- it blocks the traffic from all other namespaces.
   
 Query this web service from the `default` namespace again:
 
