@@ -3,10 +3,10 @@
 This is a fundamental policy, blocking all cross-pod networking other
 than the ones whitelisted via the other Network Policies you deploy.
 
-**Use Case:** Consider applying this manifest to any namespace you deploy
+💡 **Use Case:** Consider applying this manifest to any namespace you deploy
 workloads to (anything but `kube-system`). This will give you a base "deny all"
 policy so you can clearly identify components that need to talk to each other
-and deploy Ntework Policies for.
+and deploy Network Policies for.
 
 
 ## Manifest
