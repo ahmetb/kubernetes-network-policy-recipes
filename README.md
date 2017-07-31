@@ -15,7 +15,7 @@ the networking. Also, not all Kubernetes providers support Network Policies.
 ### Basics
 
 - [DENY all traffic to an application](01-deny-all-traffic-to-an-application.md)
-- LIMIT traffic to an application
+- [LIMIT traffic to an application](02-limit-traffic-to-an-application.md)
 
 ### Namespaces
 
