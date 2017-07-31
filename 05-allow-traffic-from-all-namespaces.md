@@ -1,0 +1,82 @@
+# ALLOW all traffic from all namespaces
+
+This NetworkPolicy will allow traffic from all pods in all namespaces
+to a particular application.
+
+**Use Case:**
+- You have a common service or a database which is used by deployments in
+  different namespaces.
+
+### Example
+
+Create a new namespace called `secondary` and start a web service:
+
+    kubectl create namespace secondary
+    
+    kubectl run web --image=nginx \
+        --namespace secondary \
+        --labels=app=web --expose --port 80
+
+Save the following manifest to `web-allow-all-namespaces.yaml` and apply
+to the cluster:
+
+```yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  namespace: secondary
+  name: web-allow-all-namespaces
+spec:
+  podSelector:
+    matchLabels:
+      app: web
+  ingress:
+  - from:
+    - namespaceSelector: {}
+```
+
+```
+$ kubectl apply web-allow-all-namespaces.yaml
+networkpolicy "web-allow-all-namespaces" created"
+```
+
+Note a few things about this NetworkPolicy manifest:
+
+- Applies the policy only to `app:web` pods in `secondary` namespace.
+- Selects all pods in all namespaces (`namespaceSelector: {}`).
+- By default, if you omit specifying a `namespaceSelector` it does not select
+  any namespaces, which means it will allow traffic only from the namespace
+  the NetworkPolicy is deployed to.
+
+> Note: Dropping all selectors from the `spec.ingress.from` item has the same
+> effect of matching all pods in all namespaces. e.g.:
+>
+>     ...
+>        ingress:
+>          - from:
+>
+> However, prefer the syntax in the full manifest clear expression of intent.
+
+
+### Try it out
+
+Query this web service from the `default` namespace:
+
+```sh
+$ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
+/ # wget -qO- --timeout=2 http://web.secondary
+wget: download timed out
+<!DOCTYPE html>
+<html>
+<head>
+(works)
+```
+
+Similarly, it also works if you query it from any pod deployed to `secondary`.
+
+### Cleanup
+
+    kubectl delete deployment web -n secondary
+    kubectl delete service web -n secondary
+    kubectl delete networkpolicy web-allow-all-namespaces -n secondary
+    kubectl delete namespace secondary

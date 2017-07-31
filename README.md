@@ -21,13 +21,12 @@ the networking. Also, not all Kubernetes providers support Network Policies.
 
 - [DENY all non-whitelisted traffic in the current namespace](03-deny-all-non-whitelisted-traffic-in-the-namespace.md)
 - [DENY all traffic from other namespaces](04-deny-traffic-from-other-namespaces.md)
-- ALLOW all traffic from other namespaces
-- ALLOW traffic from applications in other namespaces
-- ALLOW traffic from an application in another namespace
+- [ALLOW all traffic from all namespaces](05-allow-traffic-from-all-namespaces.md)
+- [ALLOW all traffic from a namespace](06-allow-traffic-from-a-namespace.md)
+- [ALLOW traffic from some pods in other namespaces]
 - ALLOW all traffic to an application in a namespace denying all non-whitelisted traffic
 
 ### Advanced
 
 - ALLOW traffic only to certain port numbers of an application
-- ALLOW traffic from apps using multiple selectors
 - ALLOW traffic from apps using multiple selectors

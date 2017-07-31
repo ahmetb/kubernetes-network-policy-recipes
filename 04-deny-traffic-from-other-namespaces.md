@@ -11,7 +11,7 @@ from the namespace the pod is living on.
   namespaces and you would like to block traffic coming from outside a
   namespace.
 
-## Example
+### Example
 
 Create a new namespace called `secondary` and start a web service:
 
@@ -50,7 +50,7 @@ Note a few things about this manifest:
   from the `secondary` namespac
 - it blocks the traffic from all other namespaces.
   
-Query this web service from the `default` namespace again:
+Query this web service from the `default` namespace:
 
 ```sh
 $ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
