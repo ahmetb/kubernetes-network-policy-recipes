@@ -25,12 +25,12 @@ Create the `prod` and `dev` namespaces:
 
 ```sh
 kubectl create namespace dev
-kubectl label namespace dev purpose=testing
+kubectl label namespace/dev purpose=testing
 ```
 
 ```sh
 kubectl create namespace prod
-kubectl label namespace dev purpose=production
+kubectl label namespace/prod purpose=production
 ```
 
 The following manifest restricts traffic to only pods in namespaces
