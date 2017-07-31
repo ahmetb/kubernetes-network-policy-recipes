@@ -28,5 +28,5 @@ the networking. Also, not all Kubernetes providers support Network Policies.
 
 ### Advanced
 
-- ALLOW traffic only to certain port numbers of an application
+- [ALLOW traffic only to certain port numbers of an application](08-allow-traffic-only-to-a-port-number.md)
 - ALLOW traffic from apps using multiple selectors
