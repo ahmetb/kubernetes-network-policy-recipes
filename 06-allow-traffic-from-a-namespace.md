@@ -24,32 +24,33 @@ Now, suppose you have these three namespaces:
 Create the `prod` and `dev` namespaces:
 
 ```sh
-cat <<EOF | kubectl create -f-
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: dev
-  labels:
-    purpose: testing
-EOF
+kubectl create namespace dev
+kubectl label namespace dev purpose=testing
 ```
 
 ```sh
-cat <<EOF | kubectl create -f-
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: prod
-  labels:
-    purpose: prod
-EOF
+kubectl create namespace prod
+kubectl label namespace dev purpose=production
 ```
 
 The following manifest restricts traffic to only pods in namespaces
-that has label `purpose=prod`. Save it to `web-allow-prod.yaml`
+that has label `purpose=production`. Save it to `web-allow-prod.yaml`
 and apply to the cluster:
 
 ```
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: web-allow-prod
+spec:
+  podSelector:
+    matchLabels:
+      app: web
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          purpose: production
 ```
 
 ```sh
