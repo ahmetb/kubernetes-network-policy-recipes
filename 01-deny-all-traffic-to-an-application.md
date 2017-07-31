@@ -64,3 +64,12 @@ If you create another NetworkPolicy that gives some Pods access to this applicat
 directly or indirectly, this NetworkPolicy will be ineffective. If there is at least
 one NetworkPolicy with a rule allowing the traffic, any policies blocking the traffic
 are ineffective.
+
+
+### Cleanup
+
+```
+kubectl delete deploy web
+kubectl delete service web
+kubectl delete networkpolicy web-deny-all
+```
