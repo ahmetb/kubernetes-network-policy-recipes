@@ -67,13 +67,14 @@ $ kubectl run test-$RANDOM --namespace=dev --rm -i -t --image=alpine -- sh
 If you don't see a command prompt, try pressing enter.
 / # wget -qO- --timeout=2 http://web.default
 wget: download timed out
+
 (traffic blocked)
 ```
 
 Query it from `prod` namespace, observe it is allowed:
 
 ```sh
-kubectl run test-$RANDOM --namespace=prod --rm -i -t --image=alpine -- sh
+$ kubectl run test-$RANDOM --namespace=prod --rm -i -t --image=alpine -- sh
 If you don't see a command prompt, try pressing enter.
 / # wget -qO- --timeout=2 http://web.default
 <!DOCTYPE html>
