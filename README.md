@@ -20,11 +20,11 @@ the networking. Also, not all Kubernetes providers support Network Policies.
 ### Namespaces
 
 - [DENY all non-whitelisted traffic in the current namespace](03-deny-all-non-whitelisted-traffic-in-the-namespace.md)
-- [DENY all traffic from other namespaces](04-deny-traffic-from-other-namespaces.md)
+- [DENY all traffic from other namespaces](04-deny-traffic-from-other-namespaces.md) 
 - [ALLOW all traffic from all namespaces](05-allow-traffic-from-all-namespaces.md)
 - [ALLOW all traffic from a namespace](06-allow-traffic-from-a-namespace.md)
 - [ALLOW traffic from some pods in another namespace](07-allow-traffic-from-some-pods-in-another-namespace.md)
-- ALLOW all traffic to an application in a namespace denying all non-whitelisted traffic
+- [LIMIT traffic to an application the current namespace](08-limit-traffic-to-an-application-to-current-namespace.md)
 
 ### Advanced
 
