@@ -83,5 +83,5 @@ $ kubectl run test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
 
     kubectl delete deployment web -n secondary
     kubectl delete service web -n secondary
-    kubectl delete networkpolicy --all -n secondary
+    kubectl delete networkpolicy web-deny-other-namespaces -n secondary
     kubectl delete namespace secondary
