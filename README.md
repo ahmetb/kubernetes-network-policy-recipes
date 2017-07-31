@@ -10,7 +10,7 @@ to try out the following examples. Applying Network Policies on your existing cl
 the networking. Also, not all Kubernetes providers support Network Policies.
 
 ### Before you begin
-- Create a cluster
+- [Create a cluster](01-create-cluster.md)
 
 ### Basics
 
