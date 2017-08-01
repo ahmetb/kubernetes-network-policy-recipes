@@ -10,7 +10,7 @@ to try out the following examples. Applying Network Policies on your existing cl
 the networking. Also, not all Kubernetes providers support Network Policies.
 
 ### Before you begin
-- [Create a cluster](01-create-cluster.md)
+- [Create a cluster](00-create-cluster.md)
 
 ### Basics
 
@@ -29,4 +29,4 @@ the networking. Also, not all Kubernetes providers support Network Policies.
 ### Advanced
 
 - [ALLOW traffic only to certain port numbers of an application](08-allow-traffic-only-to-a-port-number.md)
-- ALLOW traffic from apps using multiple selectors
+- [ALLOW traffic from apps using multiple selectors](09-allowing-traffic-with-multiple-selectors.md)
