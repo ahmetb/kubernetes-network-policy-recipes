@@ -30,3 +30,11 @@ the networking. Also, not all Kubernetes providers support Network Policies.
 
 - [ALLOW traffic only to certain port numbers of an application](08-allow-traffic-only-to-a-port-number.md)
 - [ALLOW traffic from apps using multiple selectors](09-allowing-traffic-with-multiple-selectors.md)
+
+----- 
+
+##### Author
+
+Ahmet Alp Balkan ([@ahmetb](https://twitter.com/ahmetb)).
+
+Copyright 2017, Google Inc. Licensed under Apache 2.0. Disclaimer: This is not an official Google product.
