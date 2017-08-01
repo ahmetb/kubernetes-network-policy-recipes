@@ -21,7 +21,7 @@ network policy support.
 
 - [DENY all non-whitelisted traffic in the current namespace](03-deny-all-non-whitelisted-traffic-in-the-namespace.md)
 - [DENY all traffic from other namespaces + LIMIT access to the current namespace](04-deny-traffic-from-other-namespaces.md)
-- [ALLOW all traffic from all namespaces](05-allow-traffic-from-all-namespaces.md)
+- [ALLOW traffic to an application from all namespaces](05-allow-traffic-from-all-namespaces.md)
 - [ALLOW all traffic from a namespace](06-allow-traffic-from-a-namespace.md)
 - [ALLOW traffic from some pods in another namespace](07-allow-traffic-from-some-pods-in-another-namespace.md)
 - [LIMIT traffic to an application the current namespace](08-limit-traffic-to-an-application-to-current-namespace.md)
