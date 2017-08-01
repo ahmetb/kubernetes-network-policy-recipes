@@ -5,9 +5,9 @@ This repository contains various use cases of Kubernetes
 and sample YAML files to leverage in your setup. If you ever wondered
 how to drop/restrict traffic to applications running on Kubernetes, read on.
 
-I recommend creating an empty cluster on [Google Container Engine](https://cloud.google.com/container-engine)
-to try out the following examples. Applying Network Policies on your existing cluster can disrupt
-the networking. Also, not all Kubernetes providers support Network Policies.
+Easiest way to try out Network Policies is to create a new [Google Container Engine](https://cloud.google.com/container-engine) cluster. Applying Network Policies on your existing cluster can disrupt
+the networking. At the time of writing, most cloud providers do not provide built-in
+network policy support.
 
 ### Before you begin
 - [Create a cluster](00-create-cluster.md)
