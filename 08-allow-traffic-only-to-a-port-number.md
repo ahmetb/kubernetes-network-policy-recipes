@@ -74,7 +74,8 @@ $ kubectl run test-$RANDOM --rm -i -t --image=alpine -- sh
 wget: download timed out
 
 / # wget -qO- --timeout=2 http://web:5001/metrics
-wget: download timed out```
+wget: download timed out
+```
 
 Run a pod with `role=monitoring` label, observe the traffic to
 port 5001 is allowed, but port 8001 is still not accessible:
