@@ -1,4 +1,4 @@
-# ALLOW all traffic from all namespaces
+# ALLOW all traffic to an application from all namespaces
 
 This NetworkPolicy will allow traffic from all pods in all namespaces
 to a particular application.
