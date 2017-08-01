@@ -59,7 +59,7 @@ networkpolicy "web-allow-5000" created
 
 This network policy will:
 
-- Drop all traffic to `app=web` by default.
+- Drop all non-whitelisted traffic to `app=web`.
 - Allow traffic on port `5000` from pods with label
   `role=monitoring` in the same namespace.
 
@@ -70,14 +70,29 @@ Run a pod with no custom labels, observe the traffic to ports
 
 ```sh
 $ kubectl run test-$RANDOM --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web:8000
+/ # wget -qO- --timeout=2 http://web:8001
 wget: download timed out
 
-/ # wget -qO- --timeout=2 http://web:5000
-wget: download timed out
-```
+/ # wget -qO- --timeout=2 http://web:5001/metrics
+wget: download timed out```
 
 Run a pod with `role=monitoring` label, observe the traffic to
-port 5000 is allowed, but port 8000 is not:
+port 5001 is allowed, but port 8001 is still not accessible:
 
 
+```sh
+$ kubectl run test-$RANDOM --labels=role=monitoring --rm -i -t --image=alpine -- sh 
+/ # wget -qO- --timeout=2 http://web:8001
+wget: download timed out
+
+/ # wget -qO- --timeout=2 http://web:5001/metrics
+http.requests=3
+go.goroutines=5
+go.cpus=1
+```
+
+### Cleanup
+
+    kubectl delete deployment web
+    kubectl delete service web
+    kubectl delete networkpolicy web-allow-5000
