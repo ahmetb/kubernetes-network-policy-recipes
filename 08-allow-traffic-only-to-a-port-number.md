@@ -13,20 +13,22 @@ ingress rules, the rule applies to all port numbers.
 
 Run a web server deployment:
 
-    kubectl run web --image=nginx --labels=app=web
+    kubectl run web --image=ahmet/app-on-two-ports --labels=app=web
     
-Expose the deployment as Service on ports 8000 (for web access)
-and on port 5000 (for internal monitoring).
+This application returns a hello response to requests on `http://:8000/`
+and a monitoring metrics response on `http://:5000/metrics`.
+
+Expose the deployment as Service, map 8000 to 8001, map 5000 to 5001.
 
     kubectl create service clusterip web \
-        --tcp 8000:80 \
-        --tcp 5050:5000
+        --tcp 8001:8000 \
+        --tcp 5001:5000
 
 > ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) **NOTE:**
 > Network Policies will not know the port numbers you exposed the application,
-> such as 8080 and 5050. This is because they control inter-pod traffic and
+> such as 8001 and 5001. This is because they control inter-pod traffic and
 > when you expose Pod as Service, ports are remapped like above. Therefore,
-> you need to use the container port numbers (such as 80 and 5050) in the 
+> you need to use the container port numbers (such as 8000 and 5000) in the 
 > NetworkPolicy specification.
 
 Save this Network Policy as `web-allow-5000.yaml` and apply to
