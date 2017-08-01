@@ -15,9 +15,10 @@ To create a GKE cluster with networking policies enabled, run:
     gcloud alpha container clusters create np \
         --enable-network-policy \
         --enable-kubernetes-alpha \
-        --zone us-central1-b
+        --cluster-version 1.7.2 \
+        --zone us-central1-b -q
         
-This will create a 3-node Kubernetes cluster  named `np`, with alpha features turned on
+This will create a 3-node Kubernetes 1.7.0 cluster  named `np`, with alpha features turned on
 to test out rest of this tutorial. 
 
 Once you complete this tutorial, you can delete the cluster by running:
