@@ -61,9 +61,11 @@ to police the newtork. This manifest file is missing the `spec.ingress` field.
 Therefore it is not allowing any traffic into the Pod.
 
 If you create another NetworkPolicy that gives some Pods access to this application
-directly or indirectly, this NetworkPolicy will be ineffective. If there is at least
-one NetworkPolicy with a rule allowing the traffic, any policies blocking the traffic
-are ineffective.
+directly or indirectly, this NetworkPolicy will be obsolete.
+
+If there is at least one NetworkPolicy with a rule allowing the traffic,
+it means the traffic will be routed to the pod regardless of the policies blocking
+the traffic.
 
 
 ### Cleanup
