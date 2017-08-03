@@ -1,5 +1,7 @@
 ## DENY all traffic from other namespaces
 
+__(_a.k.a  LIMIT access to the current namespace_)__
+
 You can configure a NetworkPolicy to drop all the traffic
 from other namespaces while allowing all the traffic coming
 from the namespace the pod is living on.
