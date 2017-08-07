@@ -11,16 +11,16 @@ ingress rules, the rule applies to all port numbers.
   
 ### Example
 
-Run a web server deployment:
+Run a web server deployment called `apiserver`:
 
-    kubectl run web --image=ahmet/app-on-two-ports --labels=app=web
+    kubectl run apiserver --image=ahmet/app-on-two-ports --labels=app=api
     
 This application returns a hello response to requests on `http://:8000/`
 and a monitoring metrics response on `http://:5000/metrics`.
 
 Expose the deployment as Service, map 8000 to 8001, map 5000 to 5001.
 
-    kubectl create service clusterip web \
+    kubectl create service clusterip apiserver \
         --tcp 8001:8000 \
         --tcp 5001:5000
 
@@ -31,18 +31,18 @@ Expose the deployment as Service, map 8000 to 8001, map 5000 to 5001.
 > you need to use the container port numbers (such as 8000 and 5000) in the 
 > NetworkPolicy specification.
 
-Save this Network Policy as `web-allow-5000.yaml` and apply to
+Save this Network Policy as `api-allow-5000.yaml` and apply to
 the cluster.
   
 ```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: web-allow-5000
+  name: api-allow-5000
 spec:
   podSelector:
     matchLabels:
-      app: web
+      app: api
   ingress:
   - ports:
     - port: 5000
@@ -53,13 +53,13 @@ spec:
 ```
 
 ```sh
-$ kubectl apply -f web-allow-5000.yaml
-networkpolicy "web-allow-5000" created
+$ kubectl apply -f api-allow-5000.yaml
+networkpolicy "api-allow-5000" created
 ```
 
 This network policy will:
 
-- Drop all non-whitelisted traffic to `app=web`.
+- Drop all non-whitelisted traffic to `app=api`.
 - Allow traffic on port `5000` from pods with label
   `role=monitoring` in the same namespace.
 
@@ -70,10 +70,10 @@ Run a pod with no custom labels, observe the traffic to ports
 
 ```sh
 $ kubectl run test-$RANDOM --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web:8001
+/ # wget -qO- --timeout=2 http://api:8001
 wget: download timed out
 
-/ # wget -qO- --timeout=2 http://web:5001/metrics
+/ # wget -qO- --timeout=2 http://api:5001/metrics
 wget: download timed out
 ```
 
@@ -83,10 +83,10 @@ port 5001 is allowed, but port 8001 is still not accessible:
 
 ```sh
 $ kubectl run test-$RANDOM --labels=role=monitoring --rm -i -t --image=alpine -- sh 
-/ # wget -qO- --timeout=2 http://web:8001
+/ # wget -qO- --timeout=2 http://api:8001
 wget: download timed out
 
-/ # wget -qO- --timeout=2 http://web:5001/metrics
+/ # wget -qO- --timeout=2 http://api:5001/metrics
 http.requests=3
 go.goroutines=5
 go.cpus=1
@@ -94,6 +94,6 @@ go.cpus=1
 
 ### Cleanup
 
-    kubectl delete deployment web
-    kubectl delete service web
-    kubectl delete networkpolicy web-allow-5000
+    kubectl delete deployment apiserver
+    kubectl delete service apiserver
+    kubectl delete networkpolicy api-allow-5000
