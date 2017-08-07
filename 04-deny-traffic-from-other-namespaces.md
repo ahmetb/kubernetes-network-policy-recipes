@@ -47,8 +47,10 @@ networkpolicy "web-deny-other-namespaces" created"
 Note a few things about this manifest:
 
 - `namespace: secondary` deploys it to the `secondary` namespace.
-- it selects ALL pods in `secondary` namespace as the 
-  `spec.podSelector.matchLabels` is empty (selects all pods)
+- it applies the policy to ALL pods in `secondary` namespace as the 
+  `spec.podSelector.matchLabels` is empty and therefore selects all pods.
+- it allows traffic from ALL pods in the `secondary` namespace, as
+   `spec.ingress.from.podSelector` is empty and therefore selects all pods.
   
 ## Try it out
 
