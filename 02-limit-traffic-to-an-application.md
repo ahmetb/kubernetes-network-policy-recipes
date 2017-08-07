@@ -39,12 +39,15 @@ $ kubectl apply -f api-allow.yaml
 networkpolicy "api-allow" created
 ```
 
+### Try it out
+
 Test the Network Policy is **blocking** the traffic, by running a Pod without the `app=bookstore` label:
 
     $ kubectl run test-$RANDOM --rm -i -t --image=alpine -- sh
     / # wget -qO- --timeout=2 http://apiserver
     wget: download timed out
-    (traffic blocked)
+
+Traffic blocked!
   
 Test the Network Policy is **allowing** the traffic, by running a Pod with the `app=bookstore` label:
 
@@ -52,7 +55,8 @@ Test the Network Policy is **allowing** the traffic, by running a Pod with the `
     / # wget -qO- --timeout=2 http://apiserver
     <!DOCTYPE html>
     <html><head>
-    (works)
+
+Traffic allowed.
   
 ### Cleanup 
 
