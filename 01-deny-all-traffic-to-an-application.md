@@ -9,7 +9,7 @@ application, selected using Pod Selectors.
 - You temporarily want to isolate traffic to a Service from
   other Pods.
 
-![](http://gifmaker.me/files/download/home/20170807/06/ivHLkfzdRLbvqNGgGxtZJR/output_IdBAHG.gif)
+[Imgur](http://i.imgur.com/tYTktQV.gifv)
 
 ### Example
 
