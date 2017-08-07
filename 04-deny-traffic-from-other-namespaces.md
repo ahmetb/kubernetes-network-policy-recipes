@@ -58,8 +58,9 @@ Query this web service from the `default` namespace:
 $ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.secondary
 wget: download timed out
-(blocked)
 ```
+
+It blocks the traffic from `default` namespace!
 
 Any pod in `secondary` namespace should work fine:
 
@@ -68,7 +69,6 @@ $ kubectl run test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.secondary
 <!DOCTYPE html>
 <html>
-(works)
 ```
 
 ### Cleanup
