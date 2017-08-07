@@ -34,7 +34,6 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: web
   ingress:
   - from:
     - podSelector: {}
@@ -48,10 +47,11 @@ networkpolicy "web-deny-other-namespaces" created"
 Note a few things about this manifest:
 
 - `namespace: secondary` deploys it to the `secondary` namespace.
-- it allows all connections to Pods with `app=web` label
-  from the `secondary` namespac
-- it blocks the traffic from all other namespaces.
+- it selects ALL pods in `secondary` namespace as the 
+  `spec.podSelector.matchLabels` is empty (selects all pods)
   
+## Try it out
+
 Query this web service from the `default` namespace:
 
 ```sh
