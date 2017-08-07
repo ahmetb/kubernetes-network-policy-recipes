@@ -9,6 +9,8 @@ application, selected using Pod Selectors.
 - You temporarily want to isolate traffic to a Service from
   other Pods.
 
+![](http://gifmaker.me/files/download/home/20170807/06/ivHLkfzdRLbvqNGgGxtZJR/output_IdBAHG.gif)
+
 ### Example
 
 Run a nginx Pod with labels `app=web` and `env=prod` and expose it at port 80:
