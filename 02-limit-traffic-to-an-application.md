@@ -51,7 +51,7 @@ Traffic blocked!
   
 Test the Network Policy is **allowing** the traffic, by running a Pod with the `app=bookstore` label:
 
-    $ kubectl run test-$RANDOM --rm -i -t --image=alpine --labels app=bookstore,role=foo -- sh
+    $ kubectl run test-$RANDOM --rm -i -t --image=alpine --labels app=bookstore,role=frontend -- sh
     / # wget -qO- --timeout=2 http://apiserver
     <!DOCTYPE html>
     <html><head>
