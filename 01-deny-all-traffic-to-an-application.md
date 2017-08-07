@@ -44,6 +44,8 @@ $ kubectl apply -f web-deny-all.yaml
 networkpolicy "access-nginx" created
 ```
 
+## Try it out
+
 Run a test container again, and try to query web:
 
     $ kubectl run --rm -i -t --image=alpine test-$RANDOM -- sh
