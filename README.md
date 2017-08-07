@@ -1,3 +1,6 @@
+![You can get stuff like this](img/1.gif)
+_You can get stuff like this with Network Policies..._
+
 # Kubernetes Network Policy Recipes
 
 This repository contains various use cases of Kubernetes
