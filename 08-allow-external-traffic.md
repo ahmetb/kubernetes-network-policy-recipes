@@ -8,6 +8,8 @@ or via a Load Balancer to access to the pod.
   non-whitelisted
   traffic](03-deny-all-non-whitelisted-traffic-in-the-namespace.md)
 
+![Diagram of ALLOW traffic from external clients policy](img/8.gif) 
+
 ### Example
 
 Run a web server and expose it to the internet with a Load Balancer:

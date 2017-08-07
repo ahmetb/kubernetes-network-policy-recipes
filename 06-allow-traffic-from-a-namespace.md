@@ -10,6 +10,8 @@ choose particular namespaces.
 - Enable monitoring tools deployed to a particular namespace to scrape metrics
   from the current namespace.
 
+![Diagram of ALLOW all traffic from a namespace policy](img/6.gif)
+
 ### Example
 
 Run a web server in the `default` namespace:

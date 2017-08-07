@@ -9,7 +9,7 @@ application, selected using Pod Selectors.
 - You temporarily want to isolate traffic to a Service from
   other Pods.
 
-![](https://preview.ibb.co/jZ1ENF/output_Id_BAHG.gif)
+![Diagram for DENY all traffic to an application policy](img/1.gif)
 
 ### Example
 

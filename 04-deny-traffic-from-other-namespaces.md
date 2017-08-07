@@ -13,6 +13,8 @@ from the namespace the pod is living on.
   namespaces and you would like to block traffic coming from outside a
   namespace.
 
+![Diagram of DENY all traffic from other namespaces policy](img/4.gif)
+
 ### Example
 
 Create a new namespace called `secondary` and start a web service:

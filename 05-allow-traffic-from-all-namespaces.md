@@ -11,6 +11,8 @@ You do not need this policy unless there is already a NetworkPolicy [blocking tr
 to the application](01-deny-all-traffic-to-an-application.md) or a NetworkPolicy [blocking
 non-whitelisted traffic to all pods in the namespace](03-deny-all-non-whitelisted-traffic-in-the-namespace.md).
 
+![Diagram of  ALLOW traffic to an application from all namespaces policy](img/5.gif) 
+
 ### Example
 
 Create a new namespace called `secondary` and start a web service:

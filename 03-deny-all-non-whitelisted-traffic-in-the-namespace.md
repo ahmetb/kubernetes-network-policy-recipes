@@ -11,6 +11,7 @@ This way, you can clearly identify which components have dependency on
 which components and deploy Network Policies which can be translated to dependency
 graphs between components.
 
+![Diagram of DENY all non-whitelisted traffic policy](img/3.gif)
 
 ## Manifest
 

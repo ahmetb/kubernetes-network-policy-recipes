@@ -8,7 +8,9 @@ ingress rules, the rule applies to all port numbers.
 - Allow monitoring system to collect the metrics by querying the diagnostics
   port of your application, without giving it access to the rest of the
   application.
-  
+
+![Diagram of ALLOW traffic only to a port number of an application policy](img/9.gif)
+
 ### Example
 
 Run a web server deployment called `apiserver`:

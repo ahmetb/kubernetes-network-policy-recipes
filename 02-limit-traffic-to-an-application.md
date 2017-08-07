@@ -8,6 +8,8 @@ certain Pods.
   to use it.
 - Restrict connections to a database only to the application using it.
 
+![Diagram of LIMIT traffic to an application policy](img/2.gif)
+
 ### Example
 
 Suppose your application is a REST API server, marked with labels `app=bookstore` and `role=api`:
