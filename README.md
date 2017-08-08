@@ -13,6 +13,10 @@ Engine](https://cloud.google.com/container-engine) cluster. Applying Network
 Policies on your existing cluster can disrupt the networking. At the time of
 writing, most cloud providers do not provide built-in network policy support.
 
+If you are not familiar with Network Policies at all, I recommend reading my
+[Securing Kubernetes Cluster Networking](https://ahmet.im/blog/kubernetes-network-policy/)
+article first.
+
 ### Before you begin
 - [Create a cluster](00-create-cluster.md)
 
