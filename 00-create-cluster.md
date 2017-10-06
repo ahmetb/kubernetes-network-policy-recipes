@@ -8,15 +8,13 @@ Policy provider such as Weave Net or Calico.
 **[Google Container Engine (GKE)][gke]** easily lets you get a Kubernetes cluster
 with Network Policies feature. You do not need to install a network
 policy provider yourself, as GKE configures Calico as the networking provider for you.
-(This feature is currently in alpha.)
+(This feature is currently in beta as of Kubernetes v1.8.)
 
-To create a GKE cluster with networking policies enabled, run:
+To create a GKE cluster named `np` with networking policies enabled, run:
 
-    gcloud alpha container clusters create np \
+    gcloud beta container clusters create np \
         --enable-network-policy \
-        --enable-kubernetes-alpha \
-        --cluster-version 1.7.2 \
-        --zone us-central1-b -q
+        --zone us-central1-b
         
 This will create a 3-node Kubernetes 1.7.0 cluster  named `np`, with alpha features turned on
 to test out rest of this tutorial. 
