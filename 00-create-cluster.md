@@ -10,14 +10,14 @@ with Network Policies feature. You do not need to install a network
 policy provider yourself, as GKE configures Calico as the networking provider for you.
 (This feature is currently in beta as of Kubernetes v1.8.)
 
-To create a GKE cluster named `np` with networking policies enabled, run:
+To create a GKE cluster named `np` with Network Policy feature enabled, run:
 
     gcloud beta container clusters create np \
         --enable-network-policy \
         --zone us-central1-b
         
-This will create a 3-node Kubernetes 1.7.0 cluster  named `np`, with alpha features turned on
-to test out rest of this tutorial. 
+This will create a 3-node Kubernetes cluster on Container Engine and turn on the
+Network Policy feature.
 
 Once you complete this tutorial, you can delete the cluster by running:
 
