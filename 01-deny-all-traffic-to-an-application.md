@@ -63,7 +63,7 @@ Traffic dropped!
 ### Remarks
 
 In the manifest above, we target Pods with `app=web,env=prod` labels
-to police the newtork. This manifest file is missing the `spec.ingress` field.
+to police the network. This manifest file is missing the `spec.ingress` field.
 Therefore it is not allowing any traffic into the Pod.
 
 If you create another NetworkPolicy that gives some Pods access to this application
