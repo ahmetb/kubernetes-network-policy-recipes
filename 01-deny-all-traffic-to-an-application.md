@@ -4,11 +4,13 @@ This NetworkPolicy will drop all traffic to pods of an
 application, selected using Pod Selectors.
 
 **Use Cases:**
+- It’s very common: To start whitelisting the traffic using
+  Network Policies, first you need to blacklist the traffic
+  using this policy.
 - You want to run a Pod and want to prevent any other Pods
   communicating with it.
 - You temporarily want to isolate traffic to a Service from
   other Pods.
-
 ![Diagram for DENY all traffic to an application policy](img/1.gif)
 
 ### Example
