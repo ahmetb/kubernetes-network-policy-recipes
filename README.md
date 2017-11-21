@@ -50,3 +50,5 @@ article first.
 Ahmet Alp Balkan ([@ahmetb](https://twitter.com/ahmetb)).
 
 Copyright 2017, Google Inc. Licensed under Apache 2.0. Disclaimer: This is not an official Google product.
+
+![Stargazers over time](https://starcharts.herokuapp.com/ahmetb/kubernetes-networkpolicy-tutorial.svg)]
