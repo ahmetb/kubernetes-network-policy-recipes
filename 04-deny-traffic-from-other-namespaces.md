@@ -2,9 +2,9 @@
 
 __(_a.k.a  LIMIT access to the current namespace_)__
 
-You can configure a NetworkPolicy to drop all the traffic
-from other namespaces while allowing all the traffic coming
-from the namespace the pod is living on.
+You can configure a NetworkPolicy to **deny all the traffic from other
+namespaces while allowing all the traffic coming from the same namespace** the
+pod deployed to.
 
 **Use Cases**
 - You do not want deployments in `test` namespace to accidentally
