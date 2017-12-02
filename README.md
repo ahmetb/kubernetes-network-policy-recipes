@@ -36,7 +36,7 @@ article first.
 - [ALLOW traffic from some pods in another namespace](07-allow-traffic-from-some-pods-in-another-namespace.md)
 - [LIMIT traffic to an application the current namespace](08-limit-traffic-to-an-application-to-current-namespace.md)
 
-### External Traffic
+### Serving External Traffic
 
 - [ALLOW traffic from external clients](08-allow-external-traffic.md)
 
@@ -44,6 +44,14 @@ article first.
 
 - [ALLOW traffic only to certain port numbers of an application](09-allow-traffic-only-to-a-port-number.md)
 - [ALLOW traffic from apps using multiple selectors](10-allowing-traffic-with-multiple-selectors.md)
+
+### Controlling Outbound (Egress) Traffic 🔥🆕🔥
+
+- [DENY egress traffic from an application](11-deny-egress-traffic-from-an-application.md)
+- 🔜 DENY all non-whitelisted egress traffic in a namespace
+- 🔜 LIMIT egress traffic from an application to some pods
+- 🔜 ALLOW traffic only to Pods in a namespace
+- [LIMIT egress traffic to the cluster (DENY external egress traffic)](14-deny-external-egress-traffic.md)
 
 -----
 
