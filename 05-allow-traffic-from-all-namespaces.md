@@ -6,22 +6,24 @@ to a particular application.
 **Use Case:**
 - You have a common service or a database which is used by deployments in
   different namespaces.
-  
+
 You do not need this policy unless there is already a NetworkPolicy [blocking traffic
 to the application](01-deny-all-traffic-to-an-application.md) or a NetworkPolicy [blocking
 non-whitelisted traffic to all pods in the namespace](03-deny-all-non-whitelisted-traffic-in-the-namespace.md).
 
-![Diagram of  ALLOW traffic to an application from all namespaces policy](img/5.gif) 
+![Diagram of  ALLOW traffic to an application from all namespaces policy](img/5.gif)
 
 ### Example
 
 Create a new namespace called `secondary` and start a web service:
 
-    kubectl create namespace secondary
-    
-    kubectl run web --image=nginx \
-        --namespace secondary \
-        --labels=app=web --expose --port 80
+```
+kubectl create namespace secondary
+
+kubectl run web --image=nginx \
+    --namespace secondary \
+    --labels=app=web --expose --port 80
+```
 
 Save the following manifest to `web-allow-all-namespaces.yaml` and apply
 to the cluster:

@@ -16,7 +16,7 @@ ingress rules, the rule applies to all port numbers.
 Run a web server deployment called `apiserver`:
 
     kubectl run apiserver --image=ahmet/app-on-two-ports --labels=app=api
-    
+
 This application returns a hello response to requests on `http://:8000/`
 and a monitoring metrics response on `http://:5000/metrics`.
 

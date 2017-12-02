@@ -8,16 +8,18 @@ or via a Load Balancer to access to the pod.
   non-whitelisted
   traffic](03-deny-all-non-whitelisted-traffic-in-the-namespace.md)
 
-![Diagram of ALLOW traffic from external clients policy](img/8.gif) 
+![Diagram of ALLOW traffic from external clients policy](img/8.gif)
 
 ### Example
 
 Run a web server and expose it to the internet with a Load Balancer:
 
-    kubectl run web --image=nginx \
-        --labels=app=web --port 80
-    
-    kubectl expose deployment/web --type=LoadBalancer
+```
+kubectl run web --image=nginx \
+    --labels=app=web --port 80
+
+kubectl expose deployment/web --type=LoadBalancer
+```
 
 Wait until an EXTERNAL-IP appears on `kubectl get service` output. Visit the
 `http://[EXTERNAL-IP]` on your browser and verify it is accessible.

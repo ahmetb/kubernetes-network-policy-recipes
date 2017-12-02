@@ -18,12 +18,14 @@ If you are not familiar with Network Policies at all, I recommend reading my
 article first.
 
 ### Before you begin
+
 - [Create a cluster](00-create-cluster.md)
 
 ### Basics
 
 - [DENY all traffic to an application](01-deny-all-traffic-to-an-application.md)
 - [LIMIT traffic to an application](02-limit-traffic-to-an-application.md)
+- [ALLOW all traffic to an application](02a-allow-all-traffic-to-an-application.md)
 
 ### Namespaces
 
@@ -43,12 +45,14 @@ article first.
 - [ALLOW traffic only to certain port numbers of an application](09-allow-traffic-only-to-a-port-number.md)
 - [ALLOW traffic from apps using multiple selectors](10-allowing-traffic-with-multiple-selectors.md)
 
------ 
+-----
 
 ##### Author
 
-Ahmet Alp Balkan ([@ahmetb](https://twitter.com/ahmetb)).
+Created by Ahmet Alp Balkan ([@ahmetb](https://twitter.com/ahmetb)).
 
-Copyright 2017, Google Inc. Licensed under Apache 2.0. Disclaimer: This is not an official Google product.
+Copyright 2017, Google Inc. Distributed under Apache License Version 2.0 ,see [LICENSE](LICENSE) for details.
 
-![Stargazers over time](https://starcharts.herokuapp.com/ahmetb/kubernetes-networkpolicy-tutorial.svg)]
+Disclaimer: This is not an official Google product.
+
+![Stargazers over time](https://starcharts.herokuapp.com/ahmetb/kubernetes-networkpolicy-tutorial.svg)

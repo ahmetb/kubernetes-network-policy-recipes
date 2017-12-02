@@ -1,6 +1,6 @@
 # ALLOW traffic from some pods in another namespace
 
-![#f03c15](https://placehold.it/15/f03c15/000000?text=+) **This policy is not possible today.** ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) **This policy is not possible today.** ![#f03c15](https://placehold.it/15/f03c15/000000?text=+)
 
 If you need to allow Pods of a particular application to connect
 to your application, you need to combine `podSelector` and `namespaceSelector`

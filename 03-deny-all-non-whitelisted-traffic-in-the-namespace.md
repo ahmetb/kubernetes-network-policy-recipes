@@ -22,18 +22,20 @@ metadata:
   name: default-deny-all
   namespace: default
 spec:
-  podSelector:
-    matchLabels:
+  podSelector: {}
+  ingress: []
 ```
 
 Note a few things about this manifest:
 
 - `namespace: default` deploy this policy to the `default` namespace.
-- `matchLabels:` is empty, this means it will match all the pods. Therefore
-  the policy will be enforced to ALL pods in this namspace.
-- There are no `ingress` rules, effectively causing traffic to be dropped to
-  the selected (all) pods.
-  
+- `podSelector:` is empty, this means it will match all the pods. Therefore,
+  the policy will be enforced to ALL pods in the `default` namespace .
+- There are no `ingress` rules specified. This causes incoming traffic to be
+  dropped to the selected (=all) pods.
+  - In this case, you can just omit the `ingress` field, or leave it empty
+    like `ingess:`
+
 Save this manifest to `default-deny-all.yaml` and apply:
 
 ```sh

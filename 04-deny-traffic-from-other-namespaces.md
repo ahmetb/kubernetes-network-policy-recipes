@@ -19,10 +19,12 @@ from the namespace the pod is living on.
 
 Create a new namespace called `secondary` and start a web service:
 
-    kubectl create namespace secondary
-    
-    kubectl run web --namespace secondary --image=nginx \
-        --labels=app=web --expose --port 80
+```
+kubectl create namespace secondary
+
+kubectl run web --namespace secondary --image=nginx \
+    --labels=app=web --expose --port 80
+```
 
 Save the following manifest to `web-deny-other-namespaces.yaml` and apply
 to the cluster:
@@ -49,11 +51,11 @@ networkpolicy "web-deny-other-namespaces" created"
 Note a few things about this manifest:
 
 - `namespace: secondary` deploys it to the `secondary` namespace.
-- it applies the policy to ALL pods in `secondary` namespace as the 
+- it applies the policy to ALL pods in `secondary` namespace as the
   `spec.podSelector.matchLabels` is empty and therefore selects all pods.
 - it allows traffic from ALL pods in the `secondary` namespace, as
    `spec.ingress.from.podSelector` is empty and therefore selects all pods.
-  
+
 ## Try it out
 
 Query this web service from the `default` namespace:

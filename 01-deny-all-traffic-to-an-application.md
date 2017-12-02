@@ -15,10 +15,10 @@ application, selected using Pod Selectors.
 
 ### Example
 
-Run a nginx Pod with labels `app=web` and `env=prod` and expose it at port 80:
+Run a nginx Pod with labels `app=web`  and expose it at port 80:
 
-    kubectl run web --image=nginx --labels app=web,env=prod --expose --port 80
-    
+    kubectl run web --image=nginx --labels app=web --expose --port 80
+
 Run a temporary Pod and make a request to `web` Service:
 
     $ kubectl run --rm -i -t --image=alpine test-$RANDOM -- sh
@@ -27,7 +27,7 @@ Run a temporary Pod and make a request to `web` Service:
     <html>
     <head>
     ...
-    
+
 It works, now save the following manifest to `web-deny-all.yaml`,
 then apply to the cluster:
 
@@ -40,7 +40,7 @@ spec:
   podSelector:
     matchLabels:
       app: web
-      env: prod
+  ingress: []
 ```
 
 ```
@@ -62,17 +62,16 @@ Traffic dropped!
 
 ### Remarks
 
-In the manifest above, we target Pods with `app=web,env=prod` labels
-to police the network. This manifest file is missing the `spec.ingress` field.
-Therefore it is not allowing any traffic into the Pod.
+In the manifest above, we target Pods with `app=web` label to police the
+network. This manifest file is missing the `spec.ingress` field. Therefore it is
+not allowing any traffic into the Pod.
 
-If you create another NetworkPolicy that gives some Pods access to this application
-directly or indirectly, this NetworkPolicy will be obsolete.
+If you create another NetworkPolicy that gives some Pods access to this
+application directly or indirectly, this NetworkPolicy will be obsolete.
 
-If there is at least one NetworkPolicy with a rule allowing the traffic,
-it means the traffic will be routed to the pod regardless of the policies blocking
+If there is at least one NetworkPolicy with a rule allowing the traffic, it
+means the traffic will be routed to the pod regardless of the policies blocking
 the traffic.
-
 
 ### Cleanup
 

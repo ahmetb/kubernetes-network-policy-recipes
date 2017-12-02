@@ -1,7 +1,7 @@
 # LIMIT traffic to an application
 
 You can create Networking Policies allowing traffic from only
-certain Pods. 
+certain Pods.
 
 **Use Case:**
 - Restrict traffic to a service only to other microservices that need
@@ -49,8 +49,8 @@ Test the Network Policy is **blocking** the traffic, by running a Pod without th
     / # wget -qO- --timeout=2 http://apiserver
     wget: download timed out
 
-Traffic blocked!
-  
+Traffic is blocked!
+
 Test the Network Policy is **allowing** the traffic, by running a Pod with the `app=bookstore` label:
 
     $ kubectl run test-$RANDOM --rm -i -t --image=alpine --labels app=bookstore,role=frontend -- sh
@@ -58,9 +58,9 @@ Test the Network Policy is **allowing** the traffic, by running a Pod with the `
     <!DOCTYPE html>
     <html><head>
 
-Traffic allowed.
-  
-### Cleanup 
+Traffic is allowed.
+
+### Cleanup
 
 ```
 kubectl delete deployment apiserver

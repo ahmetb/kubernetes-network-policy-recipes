@@ -5,7 +5,7 @@ NetworkPolicy lets you define multiple pod selectors to allow traffic from.
 **Use Case**
 - Create a combined NetworkPolicy that has the list of microservices that
   are allowed to connect to an application.
-  
+
 ### Example
 
 Run a Redis database on your cluster:
