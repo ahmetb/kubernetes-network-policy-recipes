@@ -67,7 +67,7 @@ Run a pod with label `app=foo`. The policy will be enforced on this pod:
 ```
 $ kubectl run --rm --restart=Never --image=alpine -i -t -l app=foo test -- ash
 
-/ # wget -O- --timeout 1 http:/web:80
+/ # wget -O- --timeout 1 http://web:80
 Connecting to web (10.59.245.232:80)
 <!DOCTYPE html>
 <html>
