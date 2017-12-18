@@ -72,10 +72,10 @@ Run a pod with no custom labels, observe the traffic to ports
 
 ```sh
 $ kubectl run test-$RANDOM --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://api:8001
+/ # wget -qO- --timeout=2 http://apiserver:8001
 wget: download timed out
 
-/ # wget -qO- --timeout=2 http://api:5001/metrics
+/ # wget -qO- --timeout=2 http://apiserver:5001/metrics
 wget: download timed out
 ```
 
@@ -85,10 +85,10 @@ port 5001 is allowed, but port 8001 is still not accessible:
 
 ```sh
 $ kubectl run test-$RANDOM --labels=role=monitoring --rm -i -t --image=alpine -- sh 
-/ # wget -qO- --timeout=2 http://api:8001
+/ # wget -qO- --timeout=2 http://apiserver:8001
 wget: download timed out
 
-/ # wget -qO- --timeout=2 http://api:5001/metrics
+/ # wget -qO- --timeout=2 http://apiserver:5001/metrics
 http.requests=3
 go.goroutines=5
 go.cpus=1
