@@ -1,4 +1,4 @@
-# DENY all non-whitelisted traffic in the current namespace
+# DENY all non-whitelisted traffic to a namespace
 
 💡 **Use Case:** This is a fundamental policy, blocking all cross-pod networking other
 than the ones whitelisted via the other Network Policies you deploy.

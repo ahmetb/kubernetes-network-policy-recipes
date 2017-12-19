@@ -48,7 +48,7 @@ article first.
 ### Controlling Outbound (Egress) Traffic 🔥🆕🔥
 
 - [DENY egress traffic from an application](11-deny-egress-traffic-from-an-application.md)
-- 🔜 DENY all non-whitelisted egress traffic in a namespace
+- [DENY all non-whitelisted egress traffic in a namespace](12-deny-all-non-whitelisted-traffic-from-the-namespace.md)
 - 🔜 LIMIT egress traffic from an application to some pods
 - 🔜 ALLOW traffic only to Pods in a namespace
 - [LIMIT egress traffic to the cluster (DENY external egress traffic)](14-deny-external-egress-traffic.md)
