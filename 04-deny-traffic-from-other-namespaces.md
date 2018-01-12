@@ -34,7 +34,7 @@ kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
   namespace: secondary
-  name: secondary-deny-other-namespaces
+  name: deny-from-other-namespaces
 spec:
   podSelector:
     matchLabels:
@@ -44,8 +44,8 @@ spec:
 ```
 
 ```
-$ kubectl apply secondary-deny-other-namespaces.yaml
-networkpolicy "secondary-deny-other-namespaces" created"
+$ kubectl apply deny-from-other-namespaces.yaml
+networkpolicy "deny-from-other-namespaces" created"
 ```
 
 Note a few things about this manifest:
