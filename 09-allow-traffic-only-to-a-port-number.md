@@ -15,7 +15,7 @@ ingress rules, the rule applies to all port numbers.
 
 Run a web server deployment called `apiserver`:
 
-    kubectl run apiserver --image=ahmet/app-on-two-ports --labels=app=api
+    kubectl run apiserver --image=ahmet/app-on-two-ports --labels=app=apiserver
 
 This application returns a hello response to requests on `http://:8000/`
 and a monitoring metrics response on `http://:5000/metrics`.
@@ -44,7 +44,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: api
+      app: apiserver
   ingress:
   - ports:
     - port: 5000
@@ -61,7 +61,7 @@ networkpolicy "api-allow-5000" created
 
 This network policy will:
 
-- Drop all non-whitelisted traffic to `app=api`.
+- Drop all non-whitelisted traffic to `app=apiserver`.
 - Allow traffic on port `5000` from pods with label
   `role=monitoring` in the same namespace.
 
