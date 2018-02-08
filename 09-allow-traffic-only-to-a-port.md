@@ -1,15 +1,17 @@
-# ALLOW traffic only to a port number of an application
+# ALLOW traffic only to a port of an application
 
-This NetworkPolicy lets you define ingress rules for specific port
-numbers of an application. If you do not specify a port number in the
-ingress rules, the rule applies to all port numbers.
+This NetworkPolicy lets you define ingress rules for specific ports
+of an application. If you do not specify a port in the
+ingress rules, the rule applies to all ports.
+
+A port may be either a numerical or named port on a pod.
 
 **Use Cases**
 - Allow monitoring system to collect the metrics by querying the diagnostics
   port of your application, without giving it access to the rest of the
   application.
 
-![Diagram of ALLOW traffic only to a port number of an application policy](img/9.gif)
+![Diagram of ALLOW traffic only to a port of an application policy](img/9.gif)
 
 ### Example
 
@@ -32,6 +34,7 @@ Expose the deployment as Service, map 8000 to 8001, map 5000 to 5001.
 > when you expose Pod as Service, ports are remapped like above. Therefore,
 > you need to use the container port numbers (such as 8000 and 5000) in the 
 > NetworkPolicy specification.
+> An alternative less error prone is to refer to the port names (such as `metrics` and `http`).
 
 Save this Network Policy as `api-allow-5000.yaml` and apply to
 the cluster.
