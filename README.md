@@ -19,6 +19,11 @@ article first.
 
 ### Before you begin
 
+> I really recommend [watching my KubeCon talk on Network
+Policies](https://www.youtube.com/watch?v=3gGpMmYeEO8) if you want to get a
+good understanding of this feature. It will help you understand this repo
+better.
+
 - [Create a cluster](00-create-cluster.md)
 
 ### Basics
