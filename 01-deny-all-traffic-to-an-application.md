@@ -45,7 +45,7 @@ spec:
 
 ```
 $ kubectl apply -f web-deny-all.yaml
-networkpolicy "access-nginx" created
+networkpolicy "web-deny-all" created
 ```
 
 ## Try it out
