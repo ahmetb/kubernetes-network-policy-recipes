@@ -44,7 +44,7 @@ spec:
 ```
 
 ```
-$ kubectl apply deny-from-other-namespaces.yaml
+$ kubectl apply -f deny-from-other-namespaces.yaml
 networkpolicy "deny-from-other-namespaces" created"
 ```
 
