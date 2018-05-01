@@ -39,7 +39,6 @@ better.
 - [ALLOW traffic to an application from all namespaces](05-allow-traffic-from-all-namespaces.md)
 - [ALLOW all traffic from a namespace](06-allow-traffic-from-a-namespace.md)
 - [ALLOW traffic from some pods in another namespace](07-allow-traffic-from-some-pods-in-another-namespace.md)
-- [LIMIT traffic to an application the current namespace](08-limit-traffic-to-an-application-to-current-namespace.md)
 
 ### Serving External Traffic
 
@@ -47,7 +46,7 @@ better.
 
 ### Advanced
 
-- [ALLOW traffic only to certain port numbers of an application](09-allow-traffic-only-to-a-port-number.md)
+- [ALLOW traffic only to certain port numbers of an application](09-allow-traffic-only-to-a-port.md)
 - [ALLOW traffic from apps using multiple selectors](10-allowing-traffic-with-multiple-selectors.md)
 
 ### Controlling Outbound (Egress) Traffic 🔥🆕🔥
