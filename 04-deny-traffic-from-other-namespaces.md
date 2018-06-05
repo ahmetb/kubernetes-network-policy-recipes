@@ -26,7 +26,7 @@ kubectl run web --namespace secondary --image=nginx \
     --labels=app=web --expose --port 80
 ```
 
-Save the following manifest to `web-deny-other-namespaces.yaml` and apply
+Save the following manifest to `deny-from-other-namespaces.yaml` and apply
 to the cluster:
 
 ```yaml
