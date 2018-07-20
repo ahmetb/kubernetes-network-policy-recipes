@@ -46,7 +46,7 @@ A few remarks about this manifest:
 Now apply it to the cluster:
 
 ```
-$ kubectl apply web-allow-all.yaml
+$ kubectl apply -f web-allow-all.yaml
 networkpolicy "web-allow-all" created"
 ```
 
