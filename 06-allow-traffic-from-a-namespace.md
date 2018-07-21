@@ -41,7 +41,7 @@ The following manifest restricts traffic to only pods in namespaces
 that has label `purpose=production`. Save it to `web-allow-prod.yaml`
 and apply to the cluster:
 
-```
+```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
