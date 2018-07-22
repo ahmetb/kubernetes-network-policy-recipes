@@ -1,23 +1,98 @@
 # ALLOW traffic from some pods in another namespace
 
-![#f03c15](https://placehold.it/15/f03c15/000000?text=+) **This policy is not possible today.** ![#f03c15](https://placehold.it/15/f03c15/000000?text=+)
+Since Kubernetes v1.11, it is possible to combine `podSelector` and `namespaceSelector`
+with an `AND` (intersection) operation.
 
-If you need to allow Pods of a particular application to connect
-to your application, you need to combine `podSelector` and `namespaceSelector`
-with an `AND` (intersection) operation. However, `spec.ingress.from[]` field of the
-NetworkPolicy object merges the result of  `podSelector` and `namespaceSelector`
-with an `OR` (union), making this impossible.
+## Example
 
-For example, the following syntax is currently not possible as a single
-rule must have either a `namespaceSelector` or a `podSelector`, not both:
+Start a `web` application:
+
+    kubectl run web --image=nginx \
+        --labels=app=web --expose --port 80
+
+Create a `other` namespace and label it:
+
+    kubectl create namespace other
+    kubectl label namespace/other team=operations
+
+The following manifest restricts traffic to only pods with label `type=monitoring` in namespaces labelled `team=operations`. Save it to `web-allow-all-ns-monitoring.yaml` and apply to the cluster:
 
 ```yaml
-ingress:
-  from:
-  - namespaceSelector: {}  # chooses all pods in all namespaces
-    podSelector:           # chooses pods with type=monitoring
-      matchLabels:
-        type: monitoring
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: web-allow-all-ns-monitoring
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: web
+  ingress:
+    - from:
+      - namespaceSelector:     # chooses all pods in namespaces labelled with team=operations
+          matchLabels:
+            team: operations  
+        podSelector:           # chooses pods with type=monitoring
+          matchLabels:
+            type: monitoring
 ```
 
-See discussion at: https://groups.google.com/forum/#!topic/kubernetes-sig-network/prmH5Tq69dE
+```
+$ kubectl apply -f web-allow-all-ns-monitoring.yaml
+networkpolicy.networking.k8s.io/web-allow-all-ns-monitoring created
+```
+
+## Try it out
+
+Query this web server from `default` namespace, *without* labelling the application `type=monitoring`, observe it is **blocked**:
+
+```sh
+$ kubectl run test-$RANDOM --rm -i -t --image=alpine -- sh
+If you don't see a command prompt, try pressing enter.
+/ # wget -qO- --timeout=2 http://web.default
+wget: download timed out
+
+(traffic blocked)
+```
+
+Query this web server from `default` namespace, labelling the application `type=monitoring`, observe it is **blocked**:
+
+```sh
+kubectl run test-$RANDOM --labels type=monitoring --rm -i -t --image=alpine -- sh
+If you don't see a command prompt, try pressing enter.
+/ # wget -qO- --timeout=2 http://web.default
+wget: download timed out
+
+(traffic blocked)
+```
+
+Query this web server from `other` namespace, *without* labelling the application `type=monitoring`, observe it is **blocked**:
+
+```sh
+$ kubectl run test-$RANDOM --namespace=other --rm -i -t --image=alpine -- sh
+If you don't see a command prompt, try pressing enter.
+/ # wget -qO- --timeout=2 http://web.default
+wget: download timed out
+
+(traffic blocked)
+```
+
+Query this web server from `other` namespace, labelling the application `type=monitoring`, observe it is **allowed**:
+
+```sh
+kubectl run test-$RANDOM --namespace=other --labels type=monitoring --rm -i -t --image=alpine -- sh
+If you don't see a command prompt, try pressing enter.
+/ # wget -qO- --timeout=2 http://web.default
+<!DOCTYPE html>
+<html>
+<head>
+...
+(traffic allowed)
+```
+
+## Cleanup
+
+    kubectl delete networkpolicy web-allow-all-ns-monitoring
+    kubectl delete namespace other
+    kubectl delete deployment web
+    kubectl delete service web
