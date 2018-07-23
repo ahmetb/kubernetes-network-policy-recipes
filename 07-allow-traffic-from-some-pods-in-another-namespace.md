@@ -37,7 +37,7 @@ spec:
             type: monitoring
 ```
 
-```
+```sh
 $ kubectl apply -f web-allow-all-ns-monitoring.yaml
 networkpolicy.networking.k8s.io/web-allow-all-ns-monitoring created
 ```
@@ -95,4 +95,3 @@ If you don't see a command prompt, try pressing enter.
     kubectl delete networkpolicy web-allow-all-ns-monitoring
     kubectl delete namespace other
     kubectl delete deployment web
-    kubectl delete service web
