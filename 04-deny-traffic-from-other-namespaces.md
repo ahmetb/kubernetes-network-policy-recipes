@@ -19,7 +19,7 @@ pod deployed to.
 
 Create a new namespace called `secondary` and start a web service:
 
-```
+```sh
 kubectl create namespace secondary
 
 kubectl run web --namespace secondary --image=nginx \
@@ -43,7 +43,7 @@ spec:
     - podSelector: {}
 ```
 
-```
+```sh
 $ kubectl apply -f deny-from-other-namespaces.yaml
 networkpolicy "deny-from-other-namespaces" created"
 ```

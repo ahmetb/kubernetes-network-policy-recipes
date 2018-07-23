@@ -14,7 +14,7 @@ or via a Load Balancer to access to the pod.
 
 Run a web server and expose it to the internet with a Load Balancer:
 
-```
+```sh
 kubectl run web --image=nginx \
     --labels=app=web --port 80
 

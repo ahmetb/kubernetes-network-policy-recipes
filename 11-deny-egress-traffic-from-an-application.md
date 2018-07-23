@@ -42,7 +42,7 @@ Remarks about this manifest file:
   egress (outbound) traffic is blocked.
   - You can drop this field altogether and have the same effect.
 
-```
+```sh
 kubectl apply -f foo-deny-egress.yaml
 networkpolicy "foo-deny-egress" created
 ```
@@ -51,7 +51,7 @@ networkpolicy "foo-deny-egress" created
 
 Run a pod with label `app=foo`, and try to connect to the `web` service:
 
-```
+```sh
 $ kubectl run --rm --restart=Never --image=alpine -i -t -l app=foo test -- ash
 
 / # wget -qO- --timeout 1 http://web:80/
@@ -70,7 +70,7 @@ allowing it to establish connections to the `kube-dns` Pods.
 So we slightly modify the YAML file to allow all outbound traffic on DNS ports
 (`53/udp` and `53/tcp`):
 
-```
+```sh
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
@@ -93,7 +93,7 @@ spec:
 Now when we try again, we actually see the IP addresses are resolved, but
 the traffic is blocked:
 
-```
+```sh
 / # wget --timeout 1 -O- http://web
 Connecting to web (10.59.245.232:80)
 wget: download timed out

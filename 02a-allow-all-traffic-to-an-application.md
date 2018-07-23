@@ -45,7 +45,7 @@ A few remarks about this manifest:
 
 Now apply it to the cluster:
 
-```
+```sh
 $ kubectl apply -f web-allow-all.yaml
 networkpolicy "web-allow-all" created"
 ```
@@ -66,7 +66,7 @@ Traffic is allowed.
 
 ### Cleanup
 
-```
+```sh
 kubectl delete deployment,service web
 kubectl delete networkpolicy web-allow-all web-deny-all
 ```

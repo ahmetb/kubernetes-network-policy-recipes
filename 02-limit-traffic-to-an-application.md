@@ -36,7 +36,7 @@ spec:
             app: bookstore
 ```
 
-```
+```sh
 $ kubectl apply -f api-allow.yaml
 networkpolicy "api-allow" created
 ```

@@ -50,7 +50,7 @@ Few remarks about this policy:
 
 Now apply it to the cluster:
 
-```
+```sh
 kubectl apply -f foo-deny-egress.yaml
 networkpolicy "foo-deny-egress" created
 ```
@@ -64,7 +64,7 @@ Run a web application named `web`:
 
 Run a pod with label `app=foo`. The policy will be enforced on this pod:
 
-```
+```sh
 $ kubectl run --rm --restart=Never --image=alpine -i -t -l app=foo test -- ash
 
 / # wget -O- --timeout 1 http://web:80
@@ -79,7 +79,7 @@ The pod with `app=foo` label is able to connect to `web` Service.
 
 Now try with an external address:
 
-```
+```sh
 / # wget -O- --timeout 1 http://www.example.com
 Connecting to www.example.com (93.184.216.34:80)
 wget: download timed out
@@ -93,7 +93,7 @@ cannot establish a connection. Effectively, external traffic is blocked.
 
 ## Cleanup
 
-```
+```sh
 kubectl delete deployment,service web
 kubectl delete networkpolicy foo-deny-external-egress
 ```
