@@ -17,7 +17,7 @@ non-whitelisted traffic to all pods in the namespace](03-deny-all-non-whiteliste
 
 Create a new namespace called `secondary` and start a web service:
 
-```
+```sh
 kubectl create namespace secondary
 
 kubectl run web --image=nginx \

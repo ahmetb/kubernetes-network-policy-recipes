@@ -37,7 +37,7 @@ spec:
             type: monitoring
 ```
 
-```
+```sh
 $ kubectl apply -f web-allow-all-ns-monitoring.yaml
 networkpolicy.networking.k8s.io/web-allow-all-ns-monitoring created
 ```

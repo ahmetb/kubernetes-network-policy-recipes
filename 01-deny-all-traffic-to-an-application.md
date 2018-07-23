@@ -43,7 +43,7 @@ spec:
   ingress: []
 ```
 
-```
+```sh
 $ kubectl apply -f web-deny-all.yaml
 networkpolicy "web-deny-all" created
 ```
@@ -75,7 +75,7 @@ the traffic.
 
 ### Cleanup
 
-```
+```sh
 kubectl delete deploy web
 kubectl delete service web
 kubectl delete networkpolicy web-deny-all
