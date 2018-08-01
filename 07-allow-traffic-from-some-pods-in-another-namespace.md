@@ -3,6 +3,10 @@
 Since Kubernetes v1.11, it is possible to combine `podSelector` and `namespaceSelector`
 with an `AND` (intersection) operation.
 
+:warning: This feature is available on Kubernetes v1.11 or after.  Most networking
+plugins do not yet support this feature. Make sure to test this policy after you
+deploy it to make sure it is working correctly.
+
 ## Example
 
 Start a `web` application:
