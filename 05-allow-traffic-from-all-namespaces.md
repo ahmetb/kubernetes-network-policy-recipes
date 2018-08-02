@@ -73,11 +73,9 @@ Query this web service from the `default` namespace:
 ```sh
 $ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.secondary
-wget: download timed out
 <!DOCTYPE html>
 <html>
 <head>
-(works)
 ```
 
 Similarly, it also works if you query it from any pod deployed to `secondary`.
