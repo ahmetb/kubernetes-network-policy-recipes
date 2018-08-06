@@ -43,8 +43,8 @@ spec:
     - namespaceSelector: {}
 ```
 
-```
-$ kubectl apply web-allow-all-namespaces.yaml
+```sh
+$ kubectl apply -f web-allow-all-namespaces.yaml
 networkpolicy "web-allow-all-namespaces" created"
 ```
 
