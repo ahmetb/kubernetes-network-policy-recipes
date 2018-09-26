@@ -1,0 +1,10 @@
+---------
+READ BEFORE YOU CREATE AN ISSUE:
+This issue tracker is specifically about the recipes listed in this repository.
+If you want to ask a general question about network policies or advice, DO NOT
+ask them here. Instead ask them on:
+- User Forum:     https://discuss.k8s.io
+- Stack Overflow: https://stackoverflow.com/questions/tagged/kubernetes
+- Slack:          https://slack.k8s.io
+- Mailing List:   https://groups.google.com/d/forum/kubernetes-users
+---------
