@@ -83,7 +83,7 @@ wget: download timed out
 ```
 
 Run a pod with `role=monitoring` label, observe the traffic to
-port 5001 is allowed, but port 8001 is still not accessible:
+port 5000 is allowed, but port 8000 is still not accessible:
 
 
 ```sh
