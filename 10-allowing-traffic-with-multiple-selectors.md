@@ -42,13 +42,13 @@ spec:
           app: bookstore
           role: search
     - podSelector:
-            matchLabels:
-              app: bookstore
-              role: api
+        matchLabels:
+          app: bookstore
+          role: api
     - podSelector:
-            matchLabels:
-              app: inventory
-              role: web
+        matchLabels:
+          app: inventory
+          role: web
 ```
 
 ```sh
