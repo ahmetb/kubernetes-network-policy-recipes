@@ -34,7 +34,7 @@ Note a few things about this manifest:
 - There are no `ingress` rules specified. This causes incoming traffic to be
   dropped to the selected (=all) pods.
   - In this case, you can just omit the `ingress` field, or leave it empty
-    like `ingess:`
+    like `ingress:`
 
 Save this manifest to `default-deny-all.yaml` and apply:
 
