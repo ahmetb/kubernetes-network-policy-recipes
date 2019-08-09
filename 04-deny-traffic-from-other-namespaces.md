@@ -17,12 +17,12 @@ pod deployed to.
 
 ### Example
 
-Create a new namespace called `secondary` and start a web service:
+Create a new namespace called `default` and start a web service:
 
 ```sh
-kubectl create namespace secondary
+kubectl create namespace default
 
-kubectl run web --namespace secondary --image=nginx \
+kubectl run web --namespace default --image=nginx \
     --labels=app=web --expose --port 80
 ```
 
@@ -33,7 +33,7 @@ to the cluster:
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  namespace: secondary
+  namespace: default
   name: deny-from-other-namespaces
 spec:
   podSelector:
@@ -50,10 +50,10 @@ networkpolicy "deny-from-other-namespaces" created"
 
 Note a few things about this manifest:
 
-- `namespace: secondary` deploys it to the `secondary` namespace.
-- it applies the policy to ALL pods in `secondary` namespace as the
+- `namespace: default` deploys it to the `default` namespace.
+- it applies the policy to ALL pods in `default` namespace as the
   `spec.podSelector.matchLabels` is empty and therefore selects all pods.
-- it allows traffic from ALL pods in the `secondary` namespace, as
+- it allows traffic from ALL pods in the `default` namespace, as
    `spec.ingress.from.podSelector` is empty and therefore selects all pods.
 
 ## Try it out
@@ -62,24 +62,23 @@ Query this web service from the `default` namespace:
 
 ```sh
 $ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web.secondary
+/ # wget -qO- --timeout=2 http://web.default
 wget: download timed out
 ```
 
 It blocks the traffic from `default` namespace!
 
-Any pod in `secondary` namespace should work fine:
+Any pod in `default` namespace should work fine:
 
 ```sh
-$ kubectl run test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web.secondary
+$ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
+/ # wget -qO- --timeout=2 http://web.default
 <!DOCTYPE html>
 <html>
 ```
 
 ### Cleanup
 
-    kubectl delete deployment web -n secondary
-    kubectl delete service web -n secondary
-    kubectl delete networkpolicy deny-from-other-namespaces -n secondary
-    kubectl delete namespace secondary
+    kubectl delete deployment web -n default
+    kubectl delete service web -n default
+    kubectl delete networkpolicy deny-from-other-namespaces -n default
