@@ -58,15 +58,15 @@ Note a few things about this manifest:
 
 ## Try it out
 
-Query this web service from the `default` namespace:
+Query this web service from the `foo` namespace:
 
 ```sh
-$ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
+$ kubectl run test-$RANDOM --namespace=foo --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.default
 wget: download timed out
 ```
 
-It blocks the traffic from `default` namespace!
+It blocks the traffic from `foo` namespace!
 
 Any pod in `default` namespace should work fine:
 
