@@ -36,8 +36,7 @@ metadata:
   namespace: secondary
   name: deny-from-other-namespaces
 spec:
-  podSelector:
-    matchLabels:
+  podSelector: {}
   ingress:
   - from:
     - podSelector: {}
