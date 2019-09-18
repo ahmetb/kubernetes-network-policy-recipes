@@ -73,6 +73,8 @@ If there is at least one NetworkPolicy with a rule allowing the traffic, it
 means the traffic will be routed to the pod regardless of the policies blocking
 the traffic.
 
+### [Visualize](https://orca.tufin.io/netpol/?yaml=kind:%20NetworkPolicy%0AapiVersion:%20networking.k8s.io%2Fv1%0Ametadata:%0A3name:%20web-deny-all%0Aspec:%0A3podSelector:%0A5matchLabels:%0A7app:%20web%0A3ingress:%20%5B%5D)
+
 ### Cleanup
 
 ```sh
