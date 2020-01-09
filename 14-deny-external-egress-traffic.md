@@ -32,7 +32,7 @@ spec:
       protocol: UDP
     - port: 53
       protocol: TCP
-  - to:
+   to:
     - namespaceSelector: {}
 ```
 
