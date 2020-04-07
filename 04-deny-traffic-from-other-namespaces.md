@@ -22,7 +22,7 @@ Create a new namespace called `secondary` and start a web service:
 ```sh
 kubectl create namespace secondary
 
-kubectl run web --namespace secondary --image=nginx \
+kubectl run --generator=run-pod/v1 web --namespace secondary --image=nginx \
     --labels=app=web --expose --port 80
 ```
 
@@ -61,7 +61,7 @@ Note a few things about this manifest:
 Query this web service from the `default` namespace:
 
 ```sh
-$ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
+$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.secondary
 wget: download timed out
 ```
@@ -71,7 +71,7 @@ It blocks the traffic from `default` namespace!
 Any pod in `secondary` namespace should work fine:
 
 ```sh
-$ kubectl run test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
+$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.secondary
 <!DOCTYPE html>
 <html>
@@ -79,7 +79,7 @@ $ kubectl run test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
 
 ### Cleanup
 
-    kubectl delete deployment web -n secondary
+    kubectl delete pod web -n secondary
     kubectl delete service web -n secondary
     kubectl delete networkpolicy deny-from-other-namespaces -n secondary
     kubectl delete namespace secondary
