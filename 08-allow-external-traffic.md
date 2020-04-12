@@ -15,10 +15,10 @@ or via a Load Balancer to access to the pod.
 Run a web server and expose it to the internet with a Load Balancer:
 
 ```sh
-kubectl run web --image=nginx \
+kubectl run --generator=run-pod/v1 web --image=nginx \
     --labels=app=web --port 80
 
-kubectl expose deployment/web --type=LoadBalancer
+kubectl expose pod/web --type=LoadBalancer
 ```
 
 Wait until an EXTERNAL-IP appears on `kubectl get service` output. Visit the
@@ -68,6 +68,6 @@ such as:
 
 ### Cleanup
 
-    kubectl delete deployment web
+    kubectl delete pod web
     kubectl delete service web
     kubectl delete networkpolicy web-allow-external
