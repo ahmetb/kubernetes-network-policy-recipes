@@ -51,7 +51,7 @@ Few remarks about this policy:
 Now apply it to the cluster:
 
 ```sh
-kubectl apply -f foo-deny-egress.yaml
+kubectl apply -f foo-deny-external-egress.yaml
 networkpolicy "foo-deny-egress" created
 ```
 
