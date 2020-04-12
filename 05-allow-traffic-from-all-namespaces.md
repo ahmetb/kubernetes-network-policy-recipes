@@ -20,7 +20,7 @@ Create a new namespace called `secondary` and start a web service:
 ```sh
 kubectl create namespace secondary
 
-kubectl run web --image=nginx \
+kubectl run --generator=run-pod/v1 web --image=nginx \
     --namespace secondary \
     --labels=app=web --expose --port 80
 ```
@@ -71,7 +71,7 @@ Note a few things about this NetworkPolicy manifest:
 Query this web service from the `default` namespace:
 
 ```sh
-$ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
+$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.secondary
 <!DOCTYPE html>
 <html>
@@ -82,7 +82,7 @@ Similarly, it also works if you query it from any pod deployed to `secondary`.
 
 ### Cleanup
 
-    kubectl delete deployment web -n secondary
+    kubectl delete pod web -n secondary
     kubectl delete service web -n secondary
     kubectl delete networkpolicy web-allow-all-namespaces -n secondary
     kubectl delete namespace secondary

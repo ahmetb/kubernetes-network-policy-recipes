@@ -15,7 +15,7 @@
 
 Run a web application with `app=web` label:
 
-    kubectl run web --image=nginx --port 80 --expose \
+    kubectl run --generator=run-pod/v1 web --image=nginx --port 80 --expose \
         --labels app=web
 
 Save the following to `foo-deny-egress.yaml` and apply to the cluster:
@@ -52,7 +52,7 @@ networkpolicy "foo-deny-egress" created
 Run a pod with label `app=foo`, and try to connect to the `web` service:
 
 ```sh
-$ kubectl run --rm --restart=Never --image=alpine -i -t -l app=foo test -- ash
+$ kubectl run --generator=run-pod/v1 --rm --restart=Never --image=alpine -i -t -l app=foo test -- ash
 
 / # wget -qO- --timeout 1 http://web:80/
 wget: bad address 'web:80'
@@ -116,7 +116,6 @@ but any host that serves traffic over port `53`.
 ## Cleanup
 
 ```
-kubectl delete deployment,service cache
-kubectl delete deployment,service web
+kubectl delete pod,service web
 kubectl delete networkpolicy foo-deny-egress
 ```
