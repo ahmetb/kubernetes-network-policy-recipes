@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  creationTimestamp: "2020-05-14T04:18:29Z"
+  generation: 17
+  name: foo-deny-egress
+  namespace: default
+  resourceVersion: "4102"
+  selfLink: /apis/networking.k8s.io/v1/namespaces/default/networkpolicies/foo-deny-egress
+  uid: 813487e2-3e6f-4600-bfd2-4cc247a375fa
+spec:
+  egress:
+  - ports:
+    - port: 53
+      protocol: TCP
+    - port: 53
+      protocol: UDP
+    - port: 8080
+      protocol: TCP
+    to:
+    - namespaceSelector:
+        matchLabels:
+          name: kube-system
+    - namespaceSelector:
+        matchLabels:
+          name: default
+      podSelector:
+        matchLabels:
+          name: internal
+  podSelector:
+    matchLabels:
+      name: external
+  policyTypes:
+  - Egress
