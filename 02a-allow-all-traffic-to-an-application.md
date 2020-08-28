@@ -6,7 +6,8 @@ non-whitelisted traffic to the application, now you have to allow access to an
 application from all pods in the current namespace.
 
 Applying this policy makes any other policies restricting the traffic to the pod
-void, and allow all traffic to it from its namespace and other namespaces.
+void, and allows all traffic to it from its namespace, other namespaces, and external
+sources.
 
 ## Example
 
@@ -35,6 +36,7 @@ A few remarks about this manifest:
 
 - `namespace: default` deploy this policy to the `default` namespace.
 - `podSelector` applies the ingress rule to pods with `app: label`
+- this policy allows traffic from outside the cluster
 - Only one ingress rule is specified, and **it is empty**.
   - Empty ingress rule (`{}`) allows traffic from all pods in the current
     namespace, as well as other namespaces. It corresponds to:
