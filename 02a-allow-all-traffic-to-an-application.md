@@ -34,7 +34,7 @@ spec:
 A few remarks about this manifest:
 
 - `namespace: default` deploy this policy to the `default` namespace.
-- `podSelector` applies the ingress rule to pods with `app: label`
+- `podSelector` applies the ingress rule to pods with `app: web`
 - Only one ingress rule is specified, and **it is empty**.
   - Empty ingress rule (`{}`) allows traffic from all pods in the current
     namespace, as well as other namespaces. It corresponds to:
