@@ -37,11 +37,7 @@ A few remarks about this manifest:
 - `podSelector` applies the ingress rule to pods with `app: web`
 - Only one ingress rule is specified, and **it is empty**.
   - Empty ingress rule (`{}`) allows traffic from all pods in the current
-    namespace, as well as other namespaces. It corresponds to:
-
-        - from:
-            podSelector: {}
-            namespaceSelector: {}
+    namespace, as well as other namespaces. 
 
 Now apply it to the cluster:
 
