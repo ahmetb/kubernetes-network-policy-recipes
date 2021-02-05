@@ -62,7 +62,7 @@ Query this web service from the `default` namespace:
 
 ```sh
 $ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web.secondary
+/ # wget -qO- --timeout=2 http://web  # having http://web.secondary will render the access successful, dns will resolve it with namespace specified. it ought to be http://web in order to time out.
 wget: download timed out
 ```
 
