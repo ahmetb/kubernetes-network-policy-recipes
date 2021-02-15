@@ -39,7 +39,7 @@ spec:
     matchLabels:
       app: web
   ingress:
-  - from: {}
+  - {}
 ```
 
 ```sh
@@ -63,7 +63,6 @@ such as:
   ingress:
   - ports:
     - port: 80
-    from: {}
 ```
 
 ### Cleanup
