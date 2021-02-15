@@ -15,13 +15,11 @@ non-whitelisted traffic to all pods in the namespace](03-deny-all-non-whiteliste
 
 ### Example
 
-Create a new namespace called `secondary` and start a web service:
+Start a web service on `default` namespace:
 
 ```sh
-kubectl create namespace secondary
-
-kubectl run web --image=nginx \
-    --namespace secondary \
+kubectl run --generator=run-pod/v1 web --image=nginx \
+    --namespace default \
     --labels=app=web --expose --port 80
 ```
 
@@ -32,7 +30,7 @@ to the cluster:
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  namespace: secondary
+  namespace: default
   name: web-allow-all-namespaces
 spec:
   podSelector:
@@ -50,7 +48,7 @@ networkpolicy "web-allow-all-namespaces" created"
 
 Note a few things about this NetworkPolicy manifest:
 
-- Applies the policy only to `app:web` pods in `secondary` namespace.
+- Applies the policy only to `app:web` pods in `default` namespace.
 - Selects all pods in all namespaces (`namespaceSelector: {}`).
 - By default, if you omit specifying a `namespaceSelector` it does not select
   any namespaces, which means it will allow traffic only from the namespace
@@ -68,21 +66,23 @@ Note a few things about this NetworkPolicy manifest:
 
 ### Try it out
 
-Query this web service from the `default` namespace:
+Create a new namespace called `secondary` and query this web service in the `default` namespace:
 
 ```sh
-$ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web.secondary
+$ kubectl create namespace secondary
+
+$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
+/ # wget -qO- --timeout=2 http://web.default
 <!DOCTYPE html>
 <html>
 <head>
 ```
 
-Similarly, it also works if you query it from any pod deployed to `secondary`.
+Similarly, it also works if you query it from any pod deployed to `bar`.
 
 ### Cleanup
 
-    kubectl delete deployment web -n secondary
-    kubectl delete service web -n secondary
-    kubectl delete networkpolicy web-allow-all-namespaces -n secondary
+    kubectl delete pod web -n default
+    kubectl delete service web -n default
+    kubectl delete networkpolicy web-allow-all-namespaces -n default
     kubectl delete namespace secondary

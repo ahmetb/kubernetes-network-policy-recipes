@@ -20,8 +20,8 @@ pod deployed to.
 Start a web service in namespace default:
 
 ```sh
-kubectl run web --namespace default --image=nginx \
-    --labels=app=web --expose --port 80
+$ kubectl run --generator=run-pod/v1 web --namespace default --image=nginx \
+--labels=app=web --expose --port 80
 ```
 
 Save the following manifest to `deny-from-other-namespaces.yaml` and apply
@@ -60,8 +60,8 @@ Query this web service from the `foo` namespace:
 
 ```sh
 $ kubectl create namespace foo
-$ kubectl run test-$RANDOM --namespace=foo --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web.default
+$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=foo --rm -i -t --image=alpine -- sh
+/ # wget -qO- --timeout=2 http://web.secondary
 wget: download timed out
 ```
 
@@ -70,15 +70,17 @@ It blocks the traffic from `foo` namespace!
 Any pod in `default` namespace should work fine:
 
 ```sh
-$ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web.default
+$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
+/ # wget -qO- --timeout=2 http://web.secondary
 <!DOCTYPE html>
 <html>
 ```
 
 ### Cleanup
 
-    kubectl delete deployment web -n default
-    kubectl delete service web -n default
-    kubectl delete networkpolicy deny-from-other-namespaces -n default
-    kubectl delete namespace foo
+```sh
+$ kubectl delete pod web -n secondary
+$ kubectl delete service web -n secondary
+$ kubectl delete networkpolicy deny-from-other-namespaces -n secondary
+$ kubectl delete namespace secondary
+```

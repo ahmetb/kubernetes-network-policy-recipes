@@ -51,7 +51,7 @@ Few remarks about this policy:
 Now apply it to the cluster:
 
 ```sh
-kubectl apply -f foo-deny-egress.yaml
+kubectl apply -f foo-deny-external-egress.yaml
 networkpolicy "foo-deny-egress" created
 ```
 
@@ -59,13 +59,13 @@ networkpolicy "foo-deny-egress" created
 
 Run a web application named `web`:
 
-    kubectl run web --image=nginx --port 80 --expose \
+    kubectl run --generator=run-pod/v1 web --image=nginx --port 80 --expose \
         --labels app=web
 
 Run a pod with label `app=foo`. The policy will be enforced on this pod:
 
 ```sh
-$ kubectl run --rm --restart=Never --image=alpine -i -t -l app=foo test -- ash
+$ kubectl run --generator=run-pod/v1 --rm --restart=Never --image=alpine -i -t -l app=foo test -- ash
 
 / # wget -O- --timeout 1 http://web:80
 Connecting to web (10.59.245.232:80)
@@ -94,6 +94,6 @@ cannot establish a connection. Effectively, external traffic is blocked.
 ## Cleanup
 
 ```sh
-kubectl delete deployment,service web
+kubectl delete pod,service web
 kubectl delete networkpolicy foo-deny-external-egress
 ```
