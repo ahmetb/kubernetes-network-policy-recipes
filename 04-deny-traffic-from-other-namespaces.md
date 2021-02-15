@@ -17,13 +17,11 @@ pod deployed to.
 
 ### Example
 
-Create a new namespace called `secondary` and start a web service:
+Start a web service in namespace default:
 
 ```sh
-kubectl create namespace secondary
-
-kubectl run --generator=run-pod/v1 web --namespace secondary --image=nginx \
-    --labels=app=web --expose --port 80
+$ kubectl run --generator=run-pod/v1 web --namespace default --image=nginx \
+--labels=app=web --expose --port 80
 ```
 
 Save the following manifest to `deny-from-other-namespaces.yaml` and apply
@@ -33,7 +31,7 @@ to the cluster:
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  namespace: secondary
+  namespace: default
   name: deny-from-other-namespaces
 spec:
   podSelector:
@@ -50,28 +48,29 @@ networkpolicy "deny-from-other-namespaces" created"
 
 Note a few things about this manifest:
 
-- `namespace: secondary` deploys it to the `secondary` namespace.
-- it applies the policy to ALL pods in `secondary` namespace as the
+- `namespace: default` deploys it to the `default` namespace.
+- it applies the policy to ALL pods in `default` namespace as the
   `spec.podSelector.matchLabels` is empty and therefore selects all pods.
-- it allows traffic from ALL pods in the `secondary` namespace, as
+- it allows traffic from ALL pods in the `default` namespace, as
    `spec.ingress.from.podSelector` is empty and therefore selects all pods.
 
 ## Try it out
 
-Query this web service from the `default` namespace:
+Query this web service from the `foo` namespace:
 
 ```sh
-$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
+$ kubectl create namespace foo
+$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=foo --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.secondary
 wget: download timed out
 ```
 
-It blocks the traffic from `default` namespace!
+It blocks the traffic from `foo` namespace!
 
-Any pod in `secondary` namespace should work fine:
+Any pod in `default` namespace should work fine:
 
 ```sh
-$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
+$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.secondary
 <!DOCTYPE html>
 <html>
@@ -79,7 +78,9 @@ $ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=secondary --rm -i 
 
 ### Cleanup
 
-    kubectl delete pod web -n secondary
-    kubectl delete service web -n secondary
-    kubectl delete networkpolicy deny-from-other-namespaces -n secondary
-    kubectl delete namespace secondary
+```sh
+$ kubectl delete pod web -n secondary
+$ kubectl delete service web -n secondary
+$ kubectl delete networkpolicy deny-from-other-namespaces -n secondary
+$ kubectl delete namespace secondary
+```
