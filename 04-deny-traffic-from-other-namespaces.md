@@ -17,11 +17,9 @@ pod deployed to.
 
 ### Example
 
-Create a new namespace called `default` and start a web service:
+Start a web service in namespace default:
 
 ```sh
-kubectl create namespace default
-
 kubectl run web --namespace default --image=nginx \
     --labels=app=web --expose --port 80
 ```
@@ -61,6 +59,7 @@ Note a few things about this manifest:
 Query this web service from the `foo` namespace:
 
 ```sh
+$ kubectl create namespace foo
 $ kubectl run test-$RANDOM --namespace=foo --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.default
 wget: download timed out
@@ -82,3 +81,4 @@ $ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
     kubectl delete deployment web -n default
     kubectl delete service web -n default
     kubectl delete networkpolicy deny-from-other-namespaces -n default
+    kubectl delete namespace foo
