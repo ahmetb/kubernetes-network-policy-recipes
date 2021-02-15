@@ -15,14 +15,14 @@ A port may be either a numerical or named port on a pod.
 
 ### Example
 
-Run a web server deployment called `apiserver`:
+Run a web server pod called `apiserver`:
 
     kubectl run --generator=run-pod/v1 apiserver --image=ahmet/app-on-two-ports --labels=app=apiserver
 
 This application returns a hello response to requests on `http://:8000/`
 and a monitoring metrics response on `http://:5000/metrics`.
 
-Expose the deployment as Service, map 8000 to 8001, map 5000 to 5001.
+Expose the pod as Service, map 8000 to 8001, map 5000 to 5001.
 
     kubectl create service clusterip apiserver \
         --tcp 8001:8000 \
