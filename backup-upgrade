@@ -36,3 +36,14 @@ kubectl uncordon node01
 ////////////note////////
 if first the cluster is on  master node, you are going to do all steps of master nodes without ssh as you are already in it.
 Nexttt when you'll start upgrading worker node, meke the drain first and then, ssh into that worker node
+
+
+////////////////////////////////////check boken node///////////
+journalctl -u kubelet
+ssh node01
+service kubelet start
+
+/////////////////mark unscheduble or to take for maintenance///////////
+kubectl drain nodeName --ignore-deamonsets  /////when it says make unscheduble
+kubectl cordon nodeName //when it says mark it unscheduble but do not remove any apps running onit 
+kubectl uncordon nodeName
