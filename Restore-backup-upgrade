@@ -1,0 +1,38 @@
+ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+     --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
+     snapshot save /opt/snapshot-pre-boot.db
+
+////don't use endpoint option when you are on master node
+
+////the path after "save" is given in the question
+
+ETCDCTL_API=3 etcdctl  --data-dir /var/lib/etcd-from-backup \
+     snapshot restore /opt/snapshot-pre-boot.db
+// then you shoul go to etcd.yaml and change the volume path data to /var/lib/etcd-from-backup
+
+*****************************Upgrade*********************
+1/kubectl drain master --ignore-deamonsets
+2/ apt update 
+apt install kubeadm=1.19.0-00
+kubeadm upgrade apply v1.19.0-00
+apt install kubelet=1.19.0-00 
+sudo systemctl daemon-reload
+systemctl restart kubelet
+3/kubectl uncordon master
+
+4/ then the same for woker node
+kubectl drain node01 --ignore-deamonsets
+ssh node01 
+///repeat all steps
+apt update 
+apt install kubeadm=1.19.0-00
+kubeadm upgrade apply v1.19.0-00
+kubeadm upgrade node
+apt install kubelet=1.19.0-00 
+sudo systemctl daemon-reload
+systemctl restart kubelet
+kubectl uncordon node01
+
+////////////note////////
+if first the cluster is on  master node, you are going to do all steps of master nodes without ssh as you are already in it.
+Nexttt when you'll start upgrading worker node, meke the drain first and then, ssh into that worker node
