@@ -97,3 +97,13 @@ cannot establish a connection. Effectively, external traffic is blocked.
 kubectl delete pod,service web
 kubectl delete networkpolicy foo-deny-external-egress
 ```
+
+## Fun
+
+The meme below* can be used to explain how your cluster looks like with a policy like this.
+
+![image](https://user-images.githubusercontent.com/14810215/126358758-5b14dcd3-79df-4f85-a248-ee6b36e2e90e.png)
+
+*: https://twitter.com/memenetes/status/1417227948206211082
+
+
