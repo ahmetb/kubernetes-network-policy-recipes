@@ -22,7 +22,7 @@ Run a web server in the `default` namespace:
 Now, suppose you have these three namespaces:
 
 - `default`: (installed by Kubernetes) This is where your API is deployed.
-- `prod`: Other production workloads run here. This has label `purpose=prod`.
+- `prod`: Other production workloads run here. This has label `purpose=production`.
 - `dev`: This is your dev/test area. This has label `purpose=testing`.
 
 Create the `prod` and `dev` namespaces:
