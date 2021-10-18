@@ -61,7 +61,7 @@ Query this web service from the `foo` namespace:
 ```sh
 $ kubectl create namespace foo
 $ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=foo --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web.secondary
+/ # wget -qO- --timeout=2 http://web.default
 wget: download timed out
 ```
 
@@ -79,8 +79,8 @@ $ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=default --rm -i -t
 ### Cleanup
 
 ```sh
-$ kubectl delete pod web -n secondary
-$ kubectl delete service web -n secondary
-$ kubectl delete networkpolicy deny-from-other-namespaces -n secondary
-$ kubectl delete namespace secondary
+$ kubectl delete pod web -n default
+$ kubectl delete service web -n default
+$ kubectl delete networkpolicy deny-from-other-namespaces -n default
+$ kubectl delete namespace foo
 ```
