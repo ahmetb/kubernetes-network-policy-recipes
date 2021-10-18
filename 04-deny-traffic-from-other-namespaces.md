@@ -71,7 +71,7 @@ Any pod in `default` namespace should work fine:
 
 ```sh
 $ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
-/ # wget -qO- --timeout=2 http://web.secondary
+/ # wget -qO- --timeout=2 http://web.default
 <!DOCTYPE html>
 <html>
 ```
