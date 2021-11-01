@@ -40,7 +40,7 @@ A few remarks about this manifest:
     namespace, as well as other namespaces. It corresponds to:
 
         - from:
-            podSelector: {}
+          - podSelector: {}
             namespaceSelector: {}
 
 Now apply it to the cluster:
