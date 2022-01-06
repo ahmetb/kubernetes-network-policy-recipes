@@ -18,7 +18,7 @@ non-whitelisted traffic to all pods in the namespace](03-deny-all-non-whiteliste
 Start a web service on `default` namespace:
 
 ```sh
-kubectl run --generator=run-pod/v1 web --image=nginx \
+kubectl run web --image=nginx \
     --namespace default \
     --labels=app=web --expose --port 80
 ```
@@ -71,7 +71,7 @@ Create a new namespace called `secondary` and query this web service in the `def
 ```sh
 $ kubectl create namespace secondary
 
-$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
+$ kubectl run test-$RANDOM --namespace=secondary --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.default
 <!DOCTYPE html>
 <html>
