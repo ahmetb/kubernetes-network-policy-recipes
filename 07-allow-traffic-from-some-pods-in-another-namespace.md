@@ -11,8 +11,7 @@ deploy it to make sure it is working correctly.
 
 Start a `web` application:
 
-    kubectl run web --image=nginx \
-        --labels=app=web --expose --port 80
+    kubectl run web --image=nginx --labels="app=web" --expose --port=80
 
 Create a `other` namespace and label it:
 
@@ -62,7 +61,7 @@ wget: download timed out
 Query this web server from `default` namespace, labelling the application `type=monitoring`, observe it is **blocked**:
 
 ```sh
-kubectl run test-$RANDOM --labels type=monitoring --rm -i -t --image=alpine -- sh
+kubectl run test-$RANDOM --labels="type=monitoring" --rm -i -t --image=alpine -- sh
 If you don't see a command prompt, try pressing enter.
 / # wget -qO- --timeout=2 http://web.default
 wget: download timed out
@@ -84,7 +83,7 @@ wget: download timed out
 Query this web server from `other` namespace, labelling the application `type=monitoring`, observe it is **allowed**:
 
 ```sh
-kubectl run test-$RANDOM --namespace=other --labels type=monitoring --rm -i -t --image=alpine -- sh
+kubectl run test-$RANDOM --namespace=other --labels="type=monitoring" --rm -i -t --image=alpine -- sh
 If you don't see a command prompt, try pressing enter.
 / # wget -qO- --timeout=2 http://web.default
 <!DOCTYPE html>

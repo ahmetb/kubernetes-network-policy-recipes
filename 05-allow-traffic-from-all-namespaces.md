@@ -18,9 +18,7 @@ non-whitelisted traffic to all pods in the namespace](03-deny-all-non-whiteliste
 Start a web service on `default` namespace:
 
 ```sh
-kubectl run web --image=nginx \
-    --namespace default \
-    --labels=app=web --expose --port 80
+kubectl run web --namespace=default --image=nginx --labels="app=web" --expose --port=80
 ```
 
 Save the following manifest to `web-allow-all-namespaces.yaml` and apply

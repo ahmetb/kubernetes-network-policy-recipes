@@ -12,7 +12,7 @@ void, and allow all traffic to it from its namespace and other namespaces.
 
 Start a `web` application:
 
-    kubectl run web --image=nginx --labels=app=web --expose --port 80
+    kubectl run web --image=nginx --labels="app=web" --expose --port=80
 
 Save the following manifest to `web-allow-all.yaml`:
 

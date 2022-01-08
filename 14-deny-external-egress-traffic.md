@@ -59,13 +59,12 @@ networkpolicy "foo-deny-egress" created
 
 Run a web application named `web`:
 
-    kubectl run web --image=nginx --port 80 --expose \
-        --labels app=web
+    kubectl run web --image=nginx --labels="app=web" --expose --port=80
 
 Run a pod with label `app=foo`. The policy will be enforced on this pod:
 
 ```sh
-$ kubectl run --rm --restart=Never --image=alpine -i -t -l app=foo test -- ash
+$ kubectl run --rm --restart=Never --image=alpine -i -t --labels="app=foo" test -- ash
 
 / # wget -O- --timeout 1 http://web:80
 Connecting to web (10.59.245.232:80)

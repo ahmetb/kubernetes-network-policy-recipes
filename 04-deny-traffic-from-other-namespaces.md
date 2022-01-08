@@ -20,8 +20,7 @@ pod deployed to.
 Start a web service in namespace default:
 
 ```sh
-$ kubectl run web --namespace default --image=nginx \
---labels=app=web --expose --port 80
+$ kubectl run web --namespace=default --image=nginx --labels="app=web" --expose --port=80
 ```
 
 Save the following manifest to `deny-from-other-namespaces.yaml` and apply
