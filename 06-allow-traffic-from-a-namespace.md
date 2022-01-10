@@ -16,8 +16,7 @@ choose particular namespaces.
 
 Run a web server in the `default` namespace:
 
-    kubectl run --generator=run-pod/v1 web --image=nginx \
-        --labels=app=web --expose --port 80
+    kubectl run web --image=nginx --labels="app=web" --expose --port=80
 
 Now, suppose you have these three namespaces:
 
@@ -67,7 +66,7 @@ networkpolicy "web-allow-prod" created
 Query this web server from `dev` namespace, observe it is blocked:
 
 ```sh
-$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=dev --rm -i -t --image=alpine -- sh
+$ kubectl run test-$RANDOM --namespace=dev --rm -i -t --image=alpine -- sh
 If you don't see a command prompt, try pressing enter.
 / # wget -qO- --timeout=2 http://web.default
 wget: download timed out
@@ -78,7 +77,7 @@ wget: download timed out
 Query it from `prod` namespace, observe it is allowed:
 
 ```sh
-$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=prod --rm -i -t --image=alpine -- sh
+$ kubectl run test-$RANDOM --namespace=prod --rm -i -t --image=alpine -- sh
 If you don't see a command prompt, try pressing enter.
 / # wget -qO- --timeout=2 http://web.default
 <!DOCTYPE html>

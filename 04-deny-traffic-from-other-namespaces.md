@@ -20,8 +20,7 @@ pod deployed to.
 Start a web service in namespace default:
 
 ```sh
-$ kubectl run --generator=run-pod/v1 web --namespace default --image=nginx \
---labels=app=web --expose --port 80
+$ kubectl run web --namespace=default --image=nginx --labels="app=web" --expose --port=80
 ```
 
 Save the following manifest to `deny-from-other-namespaces.yaml` and apply
@@ -60,7 +59,7 @@ Query this web service from the `foo` namespace:
 
 ```sh
 $ kubectl create namespace foo
-$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=foo --rm -i -t --image=alpine -- sh
+$ kubectl run test-$RANDOM --namespace=foo --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.default
 wget: download timed out
 ```
@@ -70,7 +69,7 @@ It blocks the traffic from `foo` namespace!
 Any pod in `default` namespace should work fine:
 
 ```sh
-$ kubectl run --generator=run-pod/v1 test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
+$ kubectl run test-$RANDOM --namespace=default --rm -i -t --image=alpine -- sh
 / # wget -qO- --timeout=2 http://web.default
 <!DOCTYPE html>
 <html>
