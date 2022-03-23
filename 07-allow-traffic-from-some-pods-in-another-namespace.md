@@ -77,7 +77,8 @@ If you don't see a command prompt, try pressing enter.
 / # wget -qO- --timeout=2 http://web.default
 wget: download timed out
 
-(traffic blocked)
+(traffic blocked) 
+Note: see remark below how to use OR in the network policy , so this example will work as well 
 ```
 
 Query this web server from `other` namespace, labelling the application `type=monitoring`, observe it is **allowed**:
@@ -92,6 +93,31 @@ If you don't see a command prompt, try pressing enter.
 ...
 (traffic allowed)
 ```
+
+## remarks
+Please note that that example below is OR condition 
+```
+ ingress:
+    - from:
+      - namespaceSelector:     # chooses all pods in namespaces labelled with team=opera
+          matchLabels:
+            team: operations
+      - podSelector:           # chooses pods with type=monitoring
+          matchLabels:
+            type: monitoring
+```            
+
+while this example is AND condition 
+```
+ ingress:
+    - from:
+      - namespaceSelector:     # chooses all pods in namespaces labelled with team=opera
+          matchLabels:
+            team: operations
+        podSelector:           # chooses pods with type=monitoring
+          matchLabels:
+            type: monitoring
+```  
 
 ## Cleanup
 
