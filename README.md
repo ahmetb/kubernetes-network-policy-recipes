@@ -18,17 +18,18 @@ If you are not familiar with Network Policies at all, I recommend reading my
 article first.
 
 ## NetworkPolicy Crash Course 
-NetworkPolicy works at layer 3 or 4 of OSI model and control what goes to and from a pod. 
+NetworkPolicies operate at layer 3 or 4 of OSI model (IP and port level). They are used to control the traffic in(ingress) and out(egress) of pods.
 
-Here are some NetworkPolicy gotcha's  
+Here are some NetworkPolicies gotcha's  
 - An empty selector will match everything. For example `spec.podSelector: {}` will apply the policy to all pods in the current namespace.
 
-- Selectors can only select Pods that are in the same namespace as the NetworkPolicy. Eg. `spec.podSelector` of an ingress rule can only select pods in the same namespace the NetworkPolicy is deployed in. 
+- Selectors can only select Pods that are in the same namespace as the NetworkPolicies. Eg. `spec.podSelector` of an ingress rule can only select pods in the same namespace the NetworkPolicy is deployed to. 
 
-Rules 
-- **RULE 1:** If no NetworkPolicy targets a pod, all traffic to and from all pods in all namespace is allowed. In other words all traffic is allowed unless there is one restricting it. Remember there is no deny rule in NetworkPolicy. You deny  a traffic by not mentioning it. "If you're not on the list you can't get in".
-  
-- **RULE 2:** If a NetworkPolicy matches a pod but has a null rule, all traffic is blocked. Example of this is a ""Deny all traffic policy". 
+- If no NetworkPolicies targets a pod, all traffic to and from the pod is allowed. In other words all traffic are allowed until a policy is applied.
+
+- There are no deny rules in NetworkPolicies. NetworkPolicies are deny by default allow explicitly. It's the same as saying "If you're not on the list you can't get in."
+
+- If a NetworkPolicies matches a pod but has a null rule, all traffic is blocked. Example of this is a "Deny all traffic policy". 
 ```yaml
 spec:
   podSelector:
@@ -36,7 +37,7 @@ spec:
       ...
   ingress: []
 ```
-- **RULE 3** Rules are chained together. NetworkPolicy are additive, if multiple  Network Policies exists for a pod their union is taken.
+- Rules are chained together. NetworkPolicy are additive. If multiple NetworkPolicies are selecting a pod, their union is evaluated and applied to that pod.
 
 ### Before you begin
 
