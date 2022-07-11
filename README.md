@@ -17,6 +17,27 @@ If you are not familiar with Network Policies at all, I recommend reading my
 [Securing Kubernetes Cluster Networking](https://ahmet.im/blog/kubernetes-network-policy/)
 article first.
 
+## NetworkPolicy Crash Course 
+NetworkPolicy works at layer 3 or 4 of OSI model and control what goes to and from a pod. 
+
+Here are some NetworkPolicy gotcha's  
+- An empty selector will match everything. For example `spec.podSelector: {}` will apply the policy to all pods in the current namespace.
+
+- Selectors can only select Pods that are in the same namespace as the NetworkPolicy. Eg. `spec.podSelector` of an ingress rule can only select pods in the same namespace the NetworkPolicy is deployed in. 
+
+Rules 
+- **RULE 1:** If no NetworkPolicy targets a pod, all traffic to and from all pods in all namespace is allowed. In other words all traffic is allowed unless there is one restricting it. Remember there is no deny rule in NetworkPolicy. You deny  a traffic by not mentioning it. "If you're not on the list you can't get in".
+  
+- **RULE 2:** If a NetworkPolicy matches a pod but has a null rule, all traffic is blocked. Example of this is a ""Deny all traffic policy". 
+```yaml
+spec:
+  podSelector:
+    matchLabels:
+      ...
+  ingress: []
+```
+- **RULE 3** Rules are chained together. NetworkPolicy are additive, if multiple  Network Policies exists for a pod their union is taken.
+
 ### Before you begin
 
 > I really recommend [watching my KubeCon talk on Network
