@@ -32,8 +32,10 @@ spec:
       protocol: UDP
     - port: 53
       protocol: TCP
-  - to:
-    - namespaceSelector: {}
+    to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
 ```
 
 Few remarks about this policy:
