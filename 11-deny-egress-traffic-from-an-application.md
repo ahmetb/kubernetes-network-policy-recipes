@@ -83,11 +83,18 @@ spec:
   - Egress
   egress:
   # allow DNS resolution
-  - ports:
-    - port: 53
-      protocol: UDP
-    - port: 53
-      protocol: TCP
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+    - podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+      - port: 53
+        protocol: UDP
+      - port: 53
+        protocol: TCP
 ```
 
 Now when we try again, we actually see the IP addresses are resolved, but

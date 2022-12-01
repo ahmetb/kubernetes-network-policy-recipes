@@ -27,15 +27,18 @@ spec:
   policyTypes:
   - Egress
   egress:
-  - ports:
-    - port: 53
-      protocol: UDP
-    - port: 53
-      protocol: TCP
-    to:
+  - to:
     - namespaceSelector:
         matchLabels:
           kubernetes.io/metadata.name: kube-system
+    - podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+      - port: 53
+        protocol: UDP
+      - port: 53
+        protocol: TCP
 ```
 
 Few remarks about this policy:
