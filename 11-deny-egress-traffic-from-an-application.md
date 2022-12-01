@@ -68,7 +68,7 @@ allowing it to establish connections to the `kube-dns` Pods.
 ### Allowing DNS traffic
 
 So we slightly modify the YAML file to allow all outbound traffic on DNS ports
-(`53/udp` and `53/tcp`):
+(`53/udp` and `53/tcp`), but only to pods which match the label `k8s-app: kube-dns` and are running in the kube-system namespace:
 
 ```sh
 apiVersion: networking.k8s.io/v1
@@ -83,11 +83,18 @@ spec:
   - Egress
   egress:
   # allow DNS resolution
-  - ports:
-    - port: 53
-      protocol: UDP
-    - port: 53
-      protocol: TCP
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+      - port: 53
+        protocol: UDP
+      - port: 53
+        protocol: TCP
 ```
 
 Now when we try again, we actually see the IP addresses are resolved, but
