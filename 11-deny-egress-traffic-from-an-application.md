@@ -117,9 +117,6 @@ PING google.com (74.125.129.101): 56 data bytes
 / # exit
 ```
 
-Beware that the egress rule above allows Pod to connect not only `kube-dns`,
-but any host that serves traffic over port `53`.
-
 ## Cleanup
 
 ```
