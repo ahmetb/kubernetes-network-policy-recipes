@@ -13,7 +13,7 @@ for you. (This feature is generally available as of GKE v1.10.)
 
 To create a GKE cluster named `np` with Network Policy feature enabled, run:
 
-    gcloud beta container clusters create np \
+    gcloud container clusters create np \
         --enable-network-policy \
         --zone us-central1-b
 

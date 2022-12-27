@@ -50,7 +50,7 @@ networkpolicy "web-deny-all" created
 
 ## Try it out
 
-Run a test container again, and try to query web:
+Run a test Pod again, and try to query web:
 
     $ kubectl run --rm -i -t --image=alpine test-$RANDOM -- sh
     / # wget -qO- --timeout=2 http://web
