@@ -32,7 +32,7 @@ Expose the pod as Service, map 8000 to 8001, map 5000 to 5001.
 > Network Policies will not know the port numbers you exposed the application,
 > such as 8001 and 5001. This is because they control inter-pod traffic and
 > when you expose Pod as Service, ports are remapped like above. Therefore,
-> you need to use the container port numbers (such as 8000 and 5000) in the
+> you need to use the Pod port numbers (such as 8000 and 5000) in the
 > NetworkPolicy specification.
 > An alternative less error prone is to refer to the port names (such as `metrics` and `http`).
 
