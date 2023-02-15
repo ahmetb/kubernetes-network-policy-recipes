@@ -27,6 +27,7 @@ spec:
   policyTypes:
   - Egress
   egress:
+  # For DNS
   - to:
     - namespaceSelector:
         matchLabels:
@@ -39,6 +40,11 @@ spec:
         protocol: UDP
       - port: 53
         protocol: TCP
+  # For application with label app=web
+  - to: 
+    - podSelector:
+        matchLabels:
+          app: web
 ```
 
 Few remarks about this policy:
@@ -48,7 +54,8 @@ Few remarks about this policy:
   application](11-deny-egress-traffic-from-an-application.md) example, this policy
   allows all outbound traffic on ports 53/udp and 53/tcp to the kube-dns pods for DNS resolution.
 * `to:` specifies a `namespaceSelector` which matches `kubernetes.io/metadata.name: kube-system` and a `podSelector` which matches `k8s-app: kube-dns`. This will select only the kube-dns pods in the kube-system namespace, so the outbound traffic to the kube-dns pods in the kube-system namespace will be allowed.
-* And since they are not listed, traffic to the IP addresses outside the cluster
+* Allow to access the application with label app=web
+* And since others are not listed except above rule, traffic to the IP addresses outside the cluster
   are denied.
 
 Now apply it to the cluster:
