@@ -70,7 +70,7 @@ allowing it to establish connections to the `kube-dns` Pods.
 So we slightly modify the YAML file to allow all outbound traffic on DNS ports
 (`53/udp` and `53/tcp`), but only to pods which match the label `k8s-app: kube-dns` and are running in the kube-system namespace:
 
-```sh
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
