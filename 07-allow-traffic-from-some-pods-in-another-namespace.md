@@ -94,7 +94,7 @@ If you don't see a command prompt, try pressing enter.
 (traffic allowed)
 ```
 ## remarks
-The above mentioned scenario will only work if the namespace named other has label team=operations because the condition mentioned in our network policy is a AND condition which means both the condition must be true for the network policy to allow ingress traffic
+The above mentioned scenario will only work if the namespace named `other` has label team=operations because the condition mentioned in our network policy is a AND condition which means both conditions must be true for the network policy to allow ingress traffic.
 
 ## remarks
 Please note that that example below is OR condition 
