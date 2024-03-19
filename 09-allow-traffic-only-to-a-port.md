@@ -56,6 +56,22 @@ spec:
         matchLabels:
           role: monitoring
 ```
+A named port example would look like
+```yaml
+ingress:
+- ports:
+  - port: api-port
+```
+Assuming the pod spec looks like
+```yaml
+containers:
+- name: api
+  image: api-image:latest
+  ports:
+  - name: api-port
+    containerPort: 5000
+    protocol: TCP
+```
 
 ```sh
 $ kubectl apply -f api-allow-5000.yaml
