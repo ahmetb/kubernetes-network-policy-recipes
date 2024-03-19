@@ -81,7 +81,7 @@ wget: download timed out
 Note: see remark below how to use OR in the network policy , so this example will work as well 
 ```
 
-Query this web server from `other` namespace, labelling the application `type=monitoring`, observe it is **allowed**:
+Query this web server from `other` namespace with label team=operations, labelling the application `type=monitoring`, observe it is **allowed**:
 
 ```sh
 kubectl run test-$RANDOM --namespace=other --labels="type=monitoring" --rm -i -t --image=alpine -- sh
@@ -93,6 +93,8 @@ If you don't see a command prompt, try pressing enter.
 ...
 (traffic allowed)
 ```
+## remarks
+The above mentioned scenario will only work if the namespace named `other` has label team=operations because the condition mentioned in our network policy is a AND condition which means both conditions must be true for the network policy to allow ingress traffic.
 
 ## remarks
 Please note that that example below is OR condition 
